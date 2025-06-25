@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wheather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="card">
+        <div class="search">
+          <input type="text" placeholder="Enter City Name" spellcheck="false" />
+          <button><img src="Images/search.png" /></button>
+        </div>
+        <div class="error">
+          <p>Invalid City Name!!!</p>
+        </div>
+        <div class="whether">
+          <img src="Images/rain.png" class="whetherIcon" />
+          <h1 class="temp">0°C</h1>
+          <h2 class="city">City</h2>
+          <div class="details">
+            <div class="col">
+              <img src="Images/humidity.png" alt="" />
+              <div>
+                <p class="humidity">--%</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div class="col">
+              <img src="Images/wind.png" alt="" />
+              <div>
+                <p class="wind">--km/h</p>
+                <p>Wind Speed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
