@@ -5,7 +5,7 @@ This repository is a collection of everything I’ve learned and built as I expl
 
 ---
 
-## 📅 Timeline
+## Timeline
 
 | Phase | Topics Covered |
 |-------|----------------|
