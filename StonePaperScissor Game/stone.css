@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+html,
+body {
+  width: 100vw;
+  background-color: rgb(169, 181, 230);
+}
+h1 {
+  /* background-color: rgb(42, 42, 138); */
+  background-color: rgb(74, 74, 190);
+  color: white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choices {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: brown; */
+  margin: 30px;
+  gap: 10px;
+  height: auto;
+}
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 132px;
+  width: 132px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: #dadada;
+}
+.choice:hover {
+  color: #dadada;
+  background-color: rgb(13, 13, 63);
+  /* background-color: rgb(238, 80, 80); */
+  cursor: pointer;
+}
+.score-board {
+  display: flex;
+  justify-content: center;
+  /* background-color: blueviolet; */
+  gap: 100px;
+}
+.score-board p:first-child {
+  background-color: rgb(184, 184, 204);
+  height: 55px;
+  width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 900;
+  border-radius: 9px;
+  border: 2px solid white;
+  font-size: 30px;
+}
+.score p:nth-child(2) {
+  margin-top: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+.score p:nth-child(3) {
+  margin-top: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+.score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}
+#played {
+  /* display: flex;
+  align-items: center;
+  justify-items: center; */
+  margin-left: 22px;
+}
+.msg-container {
+  background-color: rgb(74, 74, 190);
+  color: #dadada;
+  height: 25px;
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 22px;
+  border: 2px solid white;
+}
