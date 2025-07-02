@@ -16,7 +16,8 @@ This repository is a collection of everything I’ve learned and built as I expl
 | 🔗 Phase 5: Real Projects | Weather App, Bubble Game, Portfolio, etc. |
 
 ---
-
+![GitHub top language](https://img.shields.io/github/languages/top/aniketbarai/WebProjects)
+---
 ## 🧩 Structure
 
 Each folder represents a milestone or mini project:
