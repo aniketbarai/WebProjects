@@ -1,0 +1,496 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #1e1e1e;
+  font-family: sans-serif;
+  color: #a0a0a0;
+  line-height: 1.6;
+}
+.main-container {
+  display: grid;
+  max-width: 1200px;
+  grid-template-columns: 350px 1fr;
+  gap: 50px;
+  padding-top: 40px;
+  margin: auto;
+}
+.sidebar {
+  height: 90vh;
+  position: sticky;
+  top: 40px;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 40px;
+  scroll-behavior: smooth;
+}
+.main-content {
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 40px;
+}
+/* Profile */
+.profile {
+  text-align: center;
+}
+.profile img {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: 1px solid #3a3a3a;
+}
+.profile h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 20px;
+  color: #e0e0e0;
+  transition: font-size 0.3s ease, box-shadow 0.3s ease;
+}
+.profile h2:hover {
+  /* color: rgb(124, 115, 115); */
+  font-size: 1.7rem;
+  /* box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3); */
+  /* transition: color 0.3s ease; */
+}
+.profile p {
+  background-color: #1e1e1e;
+  padding: 5px 15px;
+  font-weight: 600;
+  color: rgb(104, 151, 240);
+  border: 1px solid #3a3a3a;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  display: inline-block;
+  font-family: "Segoe UI", sans-serif;
+  /* margin-top: 10px; */
+  font-weight: 600;
+}
+.profile p:hover {
+  color: rgb(250, 250, 160);
+  transition: color 0.9s ease;
+}
+/* Contact */
+.contact {
+  margin-top: 30px;
+  border-top: 2px solid #3a3a3a;
+  padding-top: 20px;
+}
+.label {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+.value {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 15px;
+}
+.email,
+.phone {
+  margin-bottom: 14px;
+}
+/* social */
+.social {
+  margin-top: 30px;
+  border-top: 2px solid #3a3a3a;
+  padding-top: 20px;
+  text-align: center;
+}
+.social img {
+  height: 25px;
+  width: 25px;
+  /* border: 1px solid #3a3a3a; */
+  /* border-radius: 50%; */
+  /* text-align: center; */
+  margin-left: 5px;
+  /* background-color: #e0e0e0; */
+  filter: grayscale(1) invert(0.7);
+  transition: filter 0.3s ease;
+}
+.social img:hover {
+  filter: grayscale(0) invert(0);
+}
+
+/* main content */
+/* navigation */
+
+#navigation {
+  border-bottom: 2px solid #3a3a3a;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+}
+nav a {
+  text-decoration: none;
+  /* color: rgb(104, 151, 240); */
+  color: #a0a0a0;
+  font-weight: 700;
+  font-family: "Segoe UI", sans-serif;
+  transition: color 0.3s ease;
+  transition: font-size 0.3s ease;
+}
+
+.active,
+nav a:hover {
+  color: rgb(104, 151, 240);
+  font-size: 17px;
+}
+
+/* about me */
+.heading {
+  color: #e0e0e0;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.line {
+  width: 60px;
+  height: 5px;
+  background-color: rgb(104, 151, 240);
+  margin-bottom: 15px;
+}
+.content {
+  text-align: justify;
+  color: #a0a0a0;
+}
+#about {
+  margin-bottom: 40px;
+}
+/* skills */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 30px;
+}
+.item {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #3a3a3a;
+  background-color: #1e1e1e;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.item img {
+  height: 48px;
+  width: 48px;
+  text-align: center;
+  filter: invert(63%) sepia(96%) saturate(1617%) hue-rotate(182deg)
+    brightness(99%) contrast(94%);
+  margin-bottom: 15px;
+}
+.item img:hover {
+  /* filter: invert(63%) sepia(96%) saturate(1617%) hue-rotate(182deg)
+    brightness(99%) contrast(94%); */
+}
+.item h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.item:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+}
+/* education  */
+#education {
+  margin-top: 30px;
+}
+.edtech {
+  /* padding-left: 20px; */
+  position: relative;
+}
+.year {
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  margin-bottom: 5px;
+}
+.year {
+  /* text-align: end; */
+}
+.degree {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.college {
+  font-style: italic;
+  color: #a0a0a0;
+  margin-bottom: 10px;
+}
+.work {
+  color: #a0a0a0;
+}
+.edfirst,
+.edsecond {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+  padding-left: 25px;
+}
+.goal {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 3px solid rgb(104, 151, 240);
+  position: absolute;
+  top: 5px;
+  left: 0px;
+  z-index: 5;
+}
+.liner {
+  position: absolute;
+  width: 2px;
+  top: 0px;
+  bottom: 0px;
+  left: 5px;
+  border: 2px solid #3a3a3a;
+}
+/* project */
+.project-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 30px;
+}
+.pro {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1ps solid #3a3a3a;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.pro:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+}
+.pro img {
+  height: 180px;
+  width: 100%;
+  object-fit: center;
+  /* transition: transform 0.5s ease, box-shadow 0.5s ease; */
+}
+.card {
+  padding: 20px;
+}
+.card h3 {
+  color: #e0e0e0;
+  margin-bottom: 10px;
+}
+.card p {
+  color: #a0a0a0;
+  line-height: 1.6;
+  text-align: start;
+  margin-bottom: 20px;
+}
+span {
+  background-color: #3a3a3a;
+  color: rgb(104, 151, 240);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  margin-right: 5px;
+  font-weight: 700;
+}
+footer {
+  opacity: 0;
+}
+
+@media (max-width: 1024px) {
+  .main-container {
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+  }
+  .sidebar,
+  .main-content {
+    padding: 30px;
+  }
+}
+
+/* Tablets (<=768px) */
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+    padding: 30px;
+  }
+  nav {
+    justify-content: center;
+  }
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+  .project-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    padding: 0 0px;
+    font-size: 1rem;
+  }
+
+  .main-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 15px;
+  }
+
+  /* Sidebar becomes stacked top section */
+  .sidebar {
+    position: relative;
+    width: auto;
+    height: auto;
+    top: 0;
+    padding: 25px;
+    border-radius: 14px;
+  }
+
+  /* Profile */
+  .profile img {
+    height: 120px;
+    width: 120px;
+  }
+
+  .profile h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+
+  .profile p {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    letter-spacing: 0.4px;
+  }
+
+  /* Contact */
+  .label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .value {
+    font-size: 1.1rem;
+  }
+
+  /* Social */
+  .social img {
+    height: 26px;
+    width: 28px;
+    text-align: center;
+    margin: 5px 10px 0px 10px;
+  }
+
+  /* Navigation */
+  nav {
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  /* Headings */
+  .heading {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .line {
+    height: 5px;
+    width: 60%;
+  }
+
+  /* Content text */
+  .content {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* Skills Grid */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .item {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .item img {
+    height: 45px;
+    width: 45px;
+  }
+
+  .item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* Education */
+  .degree {
+    font-size: 1.25rem;
+  }
+
+  .college,
+  .work {
+    font-size: 1rem;
+  }
+
+  /* Projects */
+  .project-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .pro img {
+    height: 170px;
+    border-radius: 10px;
+  }
+
+  .card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .card p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  span {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
+  .footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    /* color: #444; */
+    color: white;
+    border-radius: 10px;
+    opacity: 0.9;
+    background-color: #1e1e1e;
+  }
+
+  /* Main content */
+  .main-content {
+    padding: 20px;
+  }
+}
