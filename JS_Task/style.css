@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff3b6;
+}
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  opacity: 0.98;
+}
+
+.back-btn {
+  margin: 20px;
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.back-btn i {
+  color: gray;
+  font-size: 50px;
+  padding: 10px;
+}
+.pump {
+  position: fixed;
+  right: 24px;
+  bottom: 8px;
+  width: 320px;
+  height: 360px;
+  pointer-events: none;
+}
+.pump img {
+  position: absolute;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.box {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  transform-origin: bottom;
+  pointer-events: none;
+}
+.pipe {
+  width: 62%;
+  left: -85px;
+  bottom: 113px;
+  z-index: -2;
+  pointer-events: none;
+  transform-origin: bottom;
+  pointer-events: none;
+}
+.handle {
+  width: 72%;
+  left: 42px;
+  bottom: 228px;
+  z-index: -2;
+  transform-origin: center bottom;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 140ms ease;
+}
+.handle-press {
+  transform: translateY(90px) rotate(0deg);
+  transition: transform 130ms ease;
+}
+.handle-release {
+  transform: translateY(1) rotate(0);
+  transition: transform 250ms cubic-bezier(0.2, 1.2, 0.3, 1);
+}
+
+@keyframes box-grow {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.92);
+  } /* grow */
+  70% {
+    transform: scale(0.99);
+  } /* settle */
+  100% {
+    transform: scale(1);
+  }
+}
+.box-grow {
+  animation: box-grow 300ms cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+}
