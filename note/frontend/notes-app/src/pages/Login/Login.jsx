@@ -42,8 +42,6 @@ const Login = () => {
 
           {error && <p className='text-red-500 text-xs pb-1'>{error}</p>}
 
-
-
         <button type="submit" className="btn-primary" >Login</button>
         <p className="text-sm text-center mt-4">
           Not registered yet?{" "}
