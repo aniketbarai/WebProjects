@@ -8,7 +8,7 @@ const SearchBar = ({value,onChange,onClearSearch,handleSearch}) => {
       <input 
       type="text"
       placeholder='Search Notes...'
-      className='w-full bg-transparent text-xs py-[11px] outline-none'
+      className='w-full bg-transparent text-xs font-medium py-[11px] outline-none'
       value={value}
       onChange={onChange}
       />
