@@ -4,6 +4,7 @@ import PasswordInput from '../../components/input/PasswordInput'
 import { Link, useNavigate } from 'react-router-dom'
 import { validateEmail } from '../../utils/helper'
 import axiosInstance from '../../utils/axiosinstance'
+import logo from '../../assets/images/logo.png'
 
 const SignUp = () => {
 
@@ -59,9 +60,10 @@ const SignUp = () => {
 
  return <>
 
-  <div className="flex items-center justify-center mt-28">
+  <div className="flex items-center justify-center mt-20">
     <div className="w-96 border rounded bg-white px-7 py-10">
       <form onSubmit={handleSignUp}>
+        <img className="h-24 m-auto" src={logo} alt="" />
         <h4 className='text-2xl mb-7'>SignUp</h4>
 
         <input type='text' placeholder='Name' className='input-box' 
