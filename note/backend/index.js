@@ -17,11 +17,10 @@ const { authenticateToken } = require("./utilities");
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "*",
-  }),
-);
+app.use(cors({
+  origin: "https://smartnote-self.vercel.app",
+  credentials: true
+}));
 
 app.get("/", (req, res) => {
   res.json({ data: "hello" });
@@ -72,7 +71,7 @@ app.post("/create-account", async (req, res) => {
 });
 
 //login
-app.post("/login",async (req,res) => {
+app.post("/api/login",async (req,res) => {
     const {email,password} = req.body
 
     if(!email){
@@ -306,8 +305,8 @@ app.get('/search-note',authenticateToken,async (req,res) => {
 
 })
 
+const PORT = process.env.PORT || 8000;
 
-
-
-app.listen(8000);
-module.exports = app;
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
