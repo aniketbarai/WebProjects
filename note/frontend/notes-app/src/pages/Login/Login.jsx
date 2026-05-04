@@ -49,31 +49,65 @@ const Login = () => {
     }
   }
 
-  return <>
-
-  <div className="flex items-center justify-center mt-24">
-    <div className="w-96 border rounded bg-white px-7 py-10">
+  return (
+  <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 bg-gray-50">
+    
+    <div className="w-full max-w-md border rounded bg-white px-5 sm:px-7 py-6 sm:py-10 shadow-sm">
+      
       <form onSubmit={handleLogin}>
-        <img className="h-32 m-auto" src={logo} alt="" />
-        <h4 className='text-2xl mb-7'>Login</h4>
+        
+        {/* Logo */}
+        <img className="h-20 sm:h-28 mx-auto mb-4" src={logo} alt="logo" />
 
-        <input type='text' placeholder='Email' className='input-box' value={email} onChange={(e)=>  setEmail(e.target.value)}/>
+        {/* Title */}
+        <h4 className="text-xl sm:text-2xl mb-6 text-center">Login</h4>
 
-        <PasswordInput value={password} onChange={(e)=>   setPassword(e.target.value)} />
+        {/* Email */}
+        <input
+          type="text"
+          placeholder="Email"
+          className="input-box w-full"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-          {error && <p className='text-red-500 text-xs pb-1'>{error}</p>}
+        {/* Password */}
+        <PasswordInput
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <button type="submit" className="btn-primary" >Login</button>
-        <p className="text-sm text-center mt-4">
+        {/* Error */}
+        {error && (
+          <p className="text-red-500 text-xs sm:text-sm pb-2">
+            {error}
+          </p>
+        )}
+
+        {/* Button */}
+        <button
+          type="submit"
+          className="btn-primary w-full py-2 sm:py-3"
+        >
+          Login
+        </button>
+
+        {/* Link */}
+        <p className="text-xs sm:text-sm text-center mt-4">
           Not registered yet?{" "}
-          <Link to="/signUp" className="font-medium text-primary underline">
-          Create an Account
+          <Link
+            to="/signup"
+            className="font-medium text-primary underline"
+          >
+            Create an Account
           </Link>
         </p>
+
       </form>
     </div>
+
   </div>
-  </>
+)
 }
 
 export default Login

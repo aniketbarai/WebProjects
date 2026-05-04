@@ -1,65 +1,74 @@
 import React, { useState } from 'react'
-import { MdAdd,MdClose } from 'react-icons/md'
+import { MdAdd, MdClose } from 'react-icons/md'
 
-const TagInput = ({tags, setTag}) => {
-    const [inputValue,setInputValue] = useState("")
+const TagInput = ({ tags, setTag }) => {
+  const [inputValue, setInputValue] = useState("")
 
-    const handleInputChange = (e) =>{
-        setInputValue(e.target.value)
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value)
+  }
+
+  const addNewTag = () => {
+    if (inputValue.trim() !== "") {
+      setTag([...tags, inputValue.trim()])
+      setInputValue("")
     }
+  }
 
-    const addNewTag = () =>{
-        if(inputValue.trim() != ""){
-            setTag([...tags, inputValue.trim()])
-            setInputValue("")
-        }
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // ✅ prevent form submit
+      addNewTag()
     }
+  }
 
-    const handleKeyDown = (e) => {
-        if(e.key === "Enter"){
-            addNewTag()
-        }
-    }
+  const handleRemoveTag = (tagToRemove) => {
+    setTag(tags.filter((tag) => tag !== tagToRemove))
+  }
 
-    const handleRemoveTag = (tagToRemove)=>{
-        setTag(tags.filter((tag)=> tag !== tagToRemove))
-    }
-
-    return (
+  return (
     <div>
 
-       {tags?.length > 0 && (
-        <div className="flex items-center gap-2 flex-wrap mt-2">
-            {tags.map((tag,index)=>(
-                <span key={index} className='flex items-center gap-2 text-sm text-slate-900 bg-slate-100 px-3 py-1 justify-center rounded'>
-                    # {tag}
-                    <button onClick={()=>{
-                        handleRemoveTag(tag)
-                    }}>
-                        <MdClose />
-                    </button>
-                </span>
-            ))}
+      {/* Tags */}
+      {tags?.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-2">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="flex items-center gap-1 text-xs sm:text-sm text-slate-900 bg-slate-100 px-2 sm:px-3 py-1 rounded max-w-full break-words"
+            >
+              #{tag}
+              <button onClick={() => handleRemoveTag(tag)}>
+                <MdClose className="text-sm" />
+              </button>
+            </span>
+          ))}
         </div>
-    )}
+      )}
 
-        <div className="flex items-center gap-4 mt-3">
-            <input 
-            type="text"
-            value={inputValue}
-            className="text-sm bg-transparent border px-3 py-2 rounded outline-none" placeholder="Add tags"
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            />
+      {/* Input Section */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4 mt-3">
+        
+        <input
+          type="text"
+          value={inputValue}
+          className="w-full text-sm bg-transparent border px-3 py-2 rounded outline-none"
+          placeholder="Add tags"
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+        />
 
-            <button className="w-8 h-8 flex items-center justify-center rounded border border-blue-700 hover:bg-blue-700" onClick={()=>{
-                addNewTag()
-            }}>
-                <MdAdd className='text-2xl text-blue-700 hover:text-white'/>
-            </button>
-        </div>
+        <button
+          className="w-full sm:w-10 h-10 flex items-center justify-center rounded border border-blue-700 hover:bg-blue-700"
+          onClick={addNewTag}
+        >
+          <MdAdd className="text-xl text-blue-700 hover:text-white" />
+        </button>
+
+      </div>
+
     </div>
-    )
+  )
 }
 
 export default TagInput

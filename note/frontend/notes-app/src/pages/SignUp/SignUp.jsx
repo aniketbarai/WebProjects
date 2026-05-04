@@ -58,36 +58,76 @@ const SignUp = () => {
   }
 
 
- return <>
-
-  <div className="flex items-center justify-center mt-20">
-    <div className="w-96 border rounded bg-white px-7 py-10">
+ return (
+  <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 bg-gray-50">
+    
+    <div className="w-full max-w-md border rounded bg-white px-5 sm:px-7 py-6 sm:py-10 shadow-sm">
+      
       <form onSubmit={handleSignUp}>
-        <img className="h-24 m-auto" src={logo} alt="" />
-        <h4 className='text-2xl mb-7'>SignUp</h4>
 
-        <input type='text' placeholder='Name' className='input-box' 
-        value={name} 
-        onChange={(e)=>  setName(e.target.value)}
+        {/* Logo */}
+        <img className="h-20 sm:h-24 mx-auto mb-4" src={logo} alt="logo" />
+
+        {/* Title */}
+        <h4 className="text-xl sm:text-2xl mb-6 text-center">
+          Sign Up
+        </h4>
+
+        {/* Name */}
+        <input
+          type="text"
+          placeholder="Name"
+          className="input-box w-full"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-        <input type='text' placeholder='Email' className='input-box' value={email} onChange={(e)=>  setEmail(e.target.value)}/>
 
-        <PasswordInput value={password} onChange={(e)=>   setPassword(e.target.value)} />
+        {/* Email */}
+        <input
+          type="text"
+          placeholder="Email"
+          className="input-box w-full"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-        {error && <p className='text-red-500 text-xs pb-1'>{error}</p>}
+        {/* Password */}
+        <PasswordInput
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <button type="submit" className="btn-primary" >Create Account</button>
-        <p className="text-sm text-center mt-4">
-          Already have an account ?{" "}
-          <Link to="/login" className="font-medium text-primary underline">
-          Login
+        {/* Error */}
+        {error && (
+          <p className="text-red-500 text-xs sm:text-sm pb-2">
+            {error}
+          </p>
+        )}
+
+        {/* Button */}
+        <button
+          type="submit"
+          className="btn-primary w-full py-2 sm:py-3"
+        >
+          Create Account
+        </button>
+
+        {/* Link */}
+        <p className="text-xs sm:text-sm text-center mt-4">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-medium text-primary underline"
+          >
+            Login
           </Link>
         </p>
 
       </form>
     </div>
+
   </div>
-  </>
+)
 }
 
 export default SignUp

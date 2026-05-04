@@ -150,13 +150,20 @@ const handleCloseToast = () => {
 
   
   return (
-    <>
-      <Navbar userInfo={userInfo} onSearchNote={onSearchNote} handleClearSearch={handleClearSearch} />
+   <>
+  <Navbar 
+    userInfo={userInfo} 
+    onSearchNote={onSearchNote} 
+    handleClearSearch={handleClearSearch} 
+  />
 
-      <div className="container mx-auto w-[95vw]">
-        {allNotes.length > 0 ?( <div className="grid grid-cols-3 gap-4 mt-8">
-          {allNotes.map((item, index)=>(
-            <NoteCard 
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+    {/* Notes Grid */}
+    {allNotes.length > 0 ? (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 sm:mt-8">
+        {allNotes.map((item) => (
+          <NoteCard
             key={item._id}
             title={item.title}
             date={item.createdOn}
@@ -167,47 +174,61 @@ const handleCloseToast = () => {
             onDelete={() => deleteNote(item)}
             onPinNote={() => updateIsPinned(item)}
           />
-          ))}
-        </div>) : (<EmptyCard 
-          imgSrc={isSearch? noData:addNoteImg} 
-          message={isSearch? `Oops! Not found. Want to create? Click the 'Add' button to write down your thoughts,ideas, and reminders.`:`Start creating your first note! Click the 'Add' button to write down your thoughts,ideas, and reminders. Let's get started!`}
-        />)}
+        ))}
       </div>
-      <button className="w-16 h-16 flex items-center justify-center rounded-2xl bg-primary hover:bg-blue-600 absolute right-10 bottom-10" onClick={()=>{
-        setOpenAddEditModal({isShown:true,type:"add",data:null})
-      }}>
-        <MdAdd />
-      </button>
+    ) : (
+      <EmptyCard
+        imgSrc={isSearch ? noData : addNoteImg}
+        message={
+          isSearch
+            ? `Oops! Not found. Want to create? Click the 'Add' button to write down your thoughts, ideas, and reminders.`
+            : `Start creating your first note! Click the 'Add' button to write down your thoughts, ideas, and reminders. Let's get started!`
+        }
+      />
+    )}
+  </div>
 
-      <Modal 
-        isOpen = {openAddEditModal.isShown}
-        onRequestClose={()=>{}}
-        style={{
-          overlay:{
-            backgroundColor:"rgba(0,0,0,0.2)",
-          },
-        }}
-        contentLabel=""
-        className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5"
-        >
-        <AddEditNotes 
-          type={openAddEditModal.type}
-          noteData={openAddEditModal.data}
-          onClose={()=>{
-            setOpenAddEditModal({isShown:false, type:"add",data:null})
-          }}
-          getAllNotes={getAllNotes}
-          showToastMessage={showToastMessage}
-        />
-        </Modal>
+  {/* Floating Add Button */}
+  <button
+    className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-xl sm:rounded-2xl bg-primary hover:bg-blue-600 fixed bottom-5 right-5 sm:bottom-10 sm:right-10 shadow-lg"
+    onClick={() => {
+      setOpenAddEditModal({ isShown: true, type: "add", data: null })
+    }}
+  >
+    <MdAdd className="text-xl sm:text-2xl text-white" />
+  </button>
 
-        <Toast 
-          isShown={showToastMsg.isShown}
-          message = {showToastMsg.message}
-          type = {showToastMsg.type}
-          onClose = {handleCloseToast}
-        />
-    </>
+  {/* Modal */}
+  <Modal
+    isOpen={openAddEditModal.isShown}
+    onRequestClose={() => {
+      setOpenAddEditModal({ isShown: false, type: "add", data: null })
+    }}
+    style={{
+      overlay: {
+        backgroundColor: "rgba(0,0,0,0.3)",
+      },
+    }}
+    className="w-[95vw] sm:w-[80%] md:w-[60%] lg:w-[40%] max-h-[90vh] overflow-y-auto bg-white rounded-md mx-auto mt-10 sm:mt-14 p-4 sm:p-5"
+  >
+    <AddEditNotes
+      type={openAddEditModal.type}
+      noteData={openAddEditModal.data}
+      onClose={() => {
+        setOpenAddEditModal({ isShown: false, type: "add", data: null })
+      }}
+      getAllNotes={getAllNotes}
+      showToastMessage={showToastMessage}
+    />
+  </Modal>
+
+  <Toast
+    isShown={showToastMsg.isShown}
+    message={showToastMsg.message}
+    type={showToastMsg.type}
+    onClose={handleCloseToast}
+  />
+</>
   );
 };
 
