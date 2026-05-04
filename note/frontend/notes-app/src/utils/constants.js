@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:8000'
+export const BASE_URL = 'https://smartnote-31wh.onrender.com'
