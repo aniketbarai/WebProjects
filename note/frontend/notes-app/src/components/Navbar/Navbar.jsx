@@ -29,7 +29,7 @@ const Navbar = ({userInfo,onSearchNote,handleClearSearch}) => {
     {/* Top Row */}
     <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
       
-     <div className='flex items-center justify-between p-2 gap-4'>
+     <div className='flex items-center justify-between p-2 gap-4 flex-wrap'>
        {/* Logo / Title */}
       <h2 className='text-2xl sm:text-xl font-medium text-black'>
         SmartNote
