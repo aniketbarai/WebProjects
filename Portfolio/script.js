@@ -178,12 +178,34 @@ if (glow) {
 /* ==========================================================
    PARALLAX HERO ANIMATION ENGINE
 ========================================================== */
-const hero = document.querySelector(".hero-section");
-
-window.addEventListener("scroll", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".hero-section");
   if (!hero) return;
-  const offset = window.scrollY;
-  hero.style.transform = `translateY(${offset * 0.15}px)`;
+
+  let scrollY = 0;
+  let isVisible = true;
+
+  // 1. Only calculate calculations when the Hero is actually on screen
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isVisible = entry.isIntersecting;
+    });
+  }, { threshold: 0 });
+
+  observer.observe(hero);
+
+  // 2. Ticking loop using requestAnimationFrame for 60fps/120fps fluid rendering
+  function updateParallax() {
+    if (isVisible) {
+      scrollY = window.scrollY;
+      // Using opacity scaling alongside transform hides visual pops against upper elements
+      hero.style.transform = `translate3d(0, ${scrollY * 0.05}px, 0)`;
+    }
+    requestAnimationFrame(updateParallax);
+  }
+
+  // Start the animation engine frame loop
+  requestAnimationFrame(updateParallax);
 });
 
 /* ==========================================================
@@ -193,11 +215,11 @@ const typingElement = document.querySelector(".typing-text");
 
 if (typingElement) {
   const texts = [
-    "Software Engineer",
+    " Software Engineer",
     "Web Developer",
     "Java Programmer",
     "Problem Solver",
-    "AI Enthusiast"
+    "an AI Enthusiast"
   ];
 
   let textIndex = 0;
