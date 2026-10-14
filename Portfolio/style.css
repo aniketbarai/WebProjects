@@ -2658,3 +2658,644 @@ kbd {
     animation: none;
   }
 }
+/* ==========================================================
+   RESPONSIVE POLISH LAYER
+   Place after the base styles so it can be dropped into the
+   existing page without changing the markup or JavaScript.
+========================================================== */
+
+/* Safer sizing and wrapping at every viewport */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  width: min(1200px, calc(100% - 40px));
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+/* Large tablets and compact laptops */
+@media (max-width: 1100px) {
+  .container {
+    width: min(100% - 48px, 1040px);
+  }
+
+  .hero-grid {
+    gap: 34px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.7rem, 7vw, 4.6rem);
+  }
+
+  .code-card {
+    max-width: 400px;
+  }
+
+  .about-text,
+  .skill,
+  .deliver,
+  .lead,
+  .exp-main {
+    padding: 28px;
+  }
+
+  .rings {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tablet layout: use two columns where there is enough room,
+   but do not let cards become narrow or force page scrolling. */
+@media (min-width: 721px) and (max-width: 900px) {
+  .section {
+    padding: 96px 0 32px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 138px 0 72px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+    gap: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 6.4vw, 4.2rem);
+  }
+
+  .hero-desc {
+    font-size: 0.98rem;
+  }
+
+  .hero-visual {
+    gap: 58px;
+  }
+
+  .portrait {
+    width: min(250px, 34vw);
+  }
+
+  .code {
+    padding: 18px;
+    font-size: 0.76rem;
+    line-height: 1.7;
+  }
+
+  .about-grid,
+  .arsenal {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+  }
+
+  .globe-card {
+    min-height: 460px;
+  }
+
+  #globe {
+    min-height: 390px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ach-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .edu-grid,
+  .deliver-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .edu-card {
+    gap: 18px;
+    padding: 24px;
+  }
+
+  .edu-ring {
+    width: 104px;
+    height: 104px;
+  }
+}
+
+/* All touch/mobile widths */
+@media (max-width: 720px) {
+  :root {
+    --r: 18px;
+  }
+
+  html {
+    scroll-padding-top: 78px;
+  }
+
+  .container {
+    width: min(100% - 32px, 560px);
+  }
+
+  .nav-wrap {
+    top: max(10px, env(safe-area-inset-top));
+    padding: 0 12px;
+  }
+
+  .nav {
+    width: 100%;
+    min-height: 52px;
+    padding: 7px 8px 7px 16px;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .icon-btn,
+  .burger {
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-links {
+    top: 66px;
+    left: 12px;
+    right: 12px;
+    gap: 4px;
+    padding: 10px;
+    border-radius: 18px;
+  }
+
+  .nav-link {
+    padding: 12px 14px;
+    font-size: 0.92rem;
+  }
+
+  .section {
+    padding: 82px 0 26px;
+  }
+
+  .sec-head {
+    margin-bottom: 28px;
+  }
+
+  .sec-head h2,
+  .cta h2 {
+    font-size: clamp(1.8rem, 9vw, 2.45rem);
+    letter-spacing: -0.7px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 126px 0 64px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.45rem, 13vw, 4rem);
+    letter-spacing: -1.5px;
+    margin-top: 18px;
+  }
+
+  .hero-sub {
+    min-height: 0;
+    font-size: clamp(1.05rem, 5vw, 1.35rem);
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .hero-cta,
+  .cta-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .hero-cta .btn,
+  .cta-row .btn {
+    width: 100%;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .stat {
+    min-width: 0 !important;
+    padding: 13px 9px !important;
+    text-align: center;
+    border-radius: 14px;
+  }
+
+  .stat b {
+    font-size: clamp(1.35rem, 7vw, 1.8rem);
+  }
+
+  .stat small {
+    display: block;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .hero-visual {
+    gap: 50px;
+    margin-top: 0;
+  }
+
+  .code-card {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .code-bar {
+    padding: 10px 12px;
+  }
+
+  .code-bar span {
+    max-width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .code {
+    padding: 16px 14px;
+    font-size: clamp(0.65rem, 2.45vw, 0.78rem);
+    line-height: 1.65;
+    overflow-x: auto;
+  }
+
+  .float-chip {
+    padding: 5px 9px;
+    font-size: 0.64rem;
+  }
+
+  .c1 { left: 12px; top: -14px; }
+  .c2 { left: -4px; bottom: 30px; }
+  .c3 { right: 14px; bottom: -14px; }
+  .c4 { right: -4px; top: 72px; }
+
+  .portrait {
+    width: min(250px, 72vw);
+  }
+
+  .p-tag {
+    gap: 5px;
+    padding: 6px 9px;
+    font-size: 0.62rem;
+  }
+
+  .p-tag.t1 { left: -2%; }
+  .p-tag.t2 { right: -2%; }
+  .p-tag.t3 { left: 2%; }
+
+  .marquee {
+    padding: 13px 0;
+  }
+
+  .marquee-track {
+    gap: 28px;
+  }
+
+  .marquee span {
+    font-size: 1.15rem;
+  }
+
+  .about-grid,
+  .skills-grid,
+  .arsenal,
+  .deliver-grid,
+  .edu-grid,
+  .ach-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spot-card {
+    border-radius: 18px;
+  }
+
+  .about-text,
+  .skill,
+  .dossier,
+  .flow,
+  .deliver,
+  .lead,
+  .exp-main,
+  .tl-card {
+    padding: 22px 18px;
+  }
+
+  .about-text,
+  .term-body {
+    font-size: 0.94rem;
+  }
+
+  .rings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .ring {
+    padding-inline: 5px;
+  }
+
+  .ring svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  .ring .pct {
+    top: 29px;
+    font-size: 0.8rem;
+  }
+
+  .ring .nm {
+    font-size: 0.72rem;
+  }
+
+  .globe-card {
+    min-height: 350px;
+  }
+
+  #globe {
+    min-height: 300px;
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tabs button {
+    min-height: 42px;
+    padding-inline: 8px;
+  }
+
+  .flow {
+    padding-inline: 16px;
+  }
+
+  .flow-head {
+    align-items: flex-start;
+  }
+
+  .flow-track {
+    justify-content: flex-start;
+    margin-inline: -4px;
+    padding-bottom: 14px;
+  }
+
+  .fnode {
+    min-width: 110px;
+    padding: 13px 10px;
+  }
+
+  .fwire {
+    flex-basis: 22px;
+  }
+
+  .exp-main {
+    border-left-width: 2px;
+  }
+
+  .exp-id {
+    align-items: flex-start;
+    gap: 11px;
+  }
+
+  .exp-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 1rem;
+  }
+
+  .exp-id p,
+  .exp-meta {
+    font-size: 0.82rem;
+  }
+
+  .exp-meta {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .exp-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .exp-kpis > div {
+    padding: 13px 9px;
+    border-radius: 13px;
+  }
+
+  .exp-kpis b {
+    font-size: 1.35rem;
+  }
+
+  .exp-kpis small {
+    display: block;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .exp-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 0;
+  }
+
+  .exp-flow::before,
+  .exp-flow::after {
+    display: none;
+  }
+
+  .step span {
+    font-size: 0.74rem;
+  }
+
+  .deliver-grid,
+  .edu-grid {
+    gap: 14px;
+  }
+
+  .lead {
+    gap: 14px;
+  }
+
+  .lead-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+
+  .edu-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: 24px 18px;
+  }
+
+  .edu-ring {
+    width: 116px;
+    height: 116px;
+  }
+
+  .ach {
+    padding: 26px 18px;
+  }
+
+  .ach b {
+    font-size: 2.45rem;
+  }
+
+  .cta {
+    padding: 42px 18px;
+  }
+
+  .socials {
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+  }
+
+  .footer {
+    justify-content: center;
+    text-align: center;
+    margin-top: 54px;
+    padding: 26px 16px calc(26px + env(safe-area-inset-bottom));
+  }
+
+  .palette {
+    padding-top: max(92px, 12vh);
+  }
+
+  .palette-box {
+    width: calc(100% - 24px);
+    border-radius: 16px;
+  }
+
+  .palette-foot {
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-inline: 14px;
+    font-size: 0.65rem;
+  }
+
+  .drawer {
+    top: 10px;
+    right: 10px;
+    width: min(320px, calc(100vw - 20px));
+    padding: 22px;
+  }
+
+  .bot-stack {
+    left: 12px;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+  }
+
+  .bot-toast {
+    padding: 12px 34px 14px 12px;
+  }
+
+  .toast {
+    width: calc(100% - 32px);
+    text-align: center;
+    bottom: max(18px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Very small phones: protect the layout from crowded stat/card rows. */
+@media (max-width: 380px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .hero-title {
+    font-size: 2.35rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .exp-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-kpis > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .socials {
+    gap: 12px;
+    font-size: 0.82rem;
+  }
+}
+
+/* Keep decorative motion comfortable on touch devices. */
+@media (hover: none), (pointer: coarse) {
+  .spot-card:hover,
+  .ring:hover,
+  .fnode:hover,
+  .chips span:hover {
+    transform: none;
+  }
+
+  .spot-card:hover {
+    box-shadow: none;
+  }
+}
