@@ -1,498 +1,460 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="cyber-blue">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aniket Barai | Portfolio</title>
+  <title>Aniket Barai | Full-Stack Developer</title>
+  <meta name="description" content="Aniket Barai - Full-Stack MERN developer from Mumbai. Client-delivered e-commerce, admin dashboards and computer-vision projects." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%233b82f6'/%3E%3Cstop offset='1' stop-color='%2300f2fe'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230a0f1d'/%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='28' font-weight='800' text-anchor='middle' fill='url(%23g)'%3EAB%3C/text%3E%3Ccircle cx='50' cy='49' r='3.5' fill='%2300f2fe'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#0a0f1d" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
 </head>
 <body>
-  <div class="main-container">
-    <!-- SIDEBAR COMPONENT GRAPHICS AREA -->
-    <aside class="sidebar">
-      <div class="theme-drawer-overlay" id="drawer-overlay"></div>
-      <div class="theme-drawer" id="theme-drawer">
-        <div class="drawer-header">
-          <h3>Interface Control</h3>
-          <button class="close-drawer-btn" id="close-drawer">&times;</button>
-        </div>
-        <div class="drawer-body">
-          <span class="switcher-label">Select UI Theme</span>
-          <div class="theme-grid">
-            <button class="theme-btn btn-blue active" data-theme-id="cyber-blue" title="Cyber Blue"></button>
-            <button class="theme-btn btn-green" data-theme-id="neon-green" title="Matrix Green"></button>
-            <button class="theme-btn btn-purple" data-theme-id="royal-purple" title="Eva Purple"></button>
-            <button class="theme-btn btn-orange" data-theme-id="sunset-orange" title="Vapor Orange"></button>
-            <button class="theme-btn btn-red" data-theme-id="crimson-red" title="Crimson Hack"></button>
-          </div>
-        </div>
-      </div>
 
-      <div class="drawer-trigger-container">
-        <button class="trigger-drawer-btn" id="open-drawer">
-          <svg class="gear-icon" viewBox="0 0 24 24">
-            <path fill="currentColor"
-              d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l-.38 2.65c-.03.24.17.42.42.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3-1.07-3-3s1.07-3 3-3s3 1.07 3 3s-1.07 3-3 3z" />
-          </svg>
-          Customize Theme
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="boot">
+      <div class="boot-lines" id="boot-lines"></div>
+      <div class="boot-bar"><span id="boot-fill"></span></div>
+      <div class="boot-pct" id="boot-pct">0%</div>
+    </div>
+  </div>
+
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- NAV -->
+  <header class="nav-wrap">
+    <nav class="nav" id="nav">
+      <a href="#hero" class="nav-logo" data-magnetic>AB<span>.</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <span class="nav-pill" id="nav-pill"></span>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="open-palette" aria-label="Open command palette" title="Command palette (Ctrl+K)"><kbd>Ctrl K</kbd></button>
+        <button class="icon-btn" id="open-drawer" aria-label="Change theme" title="Theme">
+          <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
         </button>
+        <button class="icon-btn burger" id="nav-toggle" aria-label="Menu"><span></span><span></span></button>
       </div>
+    </nav>
+  </header>
 
-      <div class="profile">
-        <div class="avatar-ring">
-          <img src="./Asset/aniketFinal.JPG" alt="Aniket Barai" />
-        </div>
-        <h2>Aniket Barai</h2>
-        <span class="cyber-badge">Aspiring Software Engineer</span>
-      </div>
+  <!-- THEME DRAWER -->
+  <div class="overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="theme-drawer" aria-label="Theme settings">
+    <div class="drawer-head"><h3>Interface Control</h3><button id="close-drawer" aria-label="Close">&times;</button></div>
+    <p class="drawer-label">Select UI theme</p>
+    <div class="theme-grid">
+      <button class="theme-btn" style="--c:#3b82f6" data-theme-id="cyber-blue" title="Cyber Blue"></button>
+<button class="theme-btn" style="--c:#7f9bc4" data-theme-id="executive-slate" title="Executive Slate"></button>
+      <button class="theme-btn" style="--c:#a855f7" data-theme-id="royal-purple" title="Eva Purple"></button>
+      <button class="theme-btn" style="--c:#f97316" data-theme-id="sunset-orange" title="Vapor Orange"></button>
+      <button class="theme-btn" style="--c:#ef4444" data-theme-id="crimson-red" title="Crimson Hack"></button>
+    </div>
+    <label class="toggle"><input type="checkbox" id="toggle-fx" checked /><span>Particle background</span></label>
+  </aside>
 
-      <div class="contact">
-        <div class="contact-card">
-          <h4 class="label">Email</h4>
-          <a href="mailto:aniketbarai677@gmail.com" class="value">aniketbarai677@gmail.com</a>
-        </div>
-        <div class="contact-card">
-          <h4 class="label">Phone</h4>
-          <a href="tel:7304414905" class="value">+91 7304414905</a>
-        </div>
-        <div class="contact-card">
-          <h4 class="label">Location</h4>
-          <p class="value">Mumbai, India</p>
-        </div>
-      </div>
+  <!-- COMMAND PALETTE -->
+  <div class="palette" id="palette" role="dialog" aria-label="Command palette">
+    <div class="palette-box">
+      <input id="palette-input" placeholder="Type a command or jump to a section..." autocomplete="off" />
+      <ul id="palette-list"></ul>
+      <div class="palette-foot"><span>↑↓ navigate</span><span>↵ run</span><span>esc close</span></div>
+    </div>
+  </div>
 
-      <div class="social">
-        <a href="https://www.linkedin.com/in/aniketbarai/" target="_blank" aria-label="LinkedIn">
-          <img src="https://files.svgcdn.io/uiw/linkedin.svg" alt="LinkedIn" />
-        </a>
-        <a href="https://github.com/aniketbarai" target="_blank" aria-label="GitHub">
-          <img src="https://files.svgcdn.io/zmdi/github.svg" alt="GitHub" />
-        </a>
-        <a href="https://codolio.com/profile/aniketbarai" target="_blank" aria-label="Codolio">
-          <img src="https://files.svgcdn.io/bxs/left-down-arrow-circle.svg" alt="Codolio" />
-        </a>
-      </div>
-    </aside>
-
-    <!-- PORTFOLIO MAIN DATA DISPLAY ENGINE -->
-    <main class="main-content">
-      <!-- HERO SECTION -->
-      <section id="hero" class="hero-section">
-        <div class="hero-bg-grid"></div>
-        <div class="hero-content">
-          <span class="hero-badge">
-            Available for Internships & Opportunities
-          </span>
-
-          <h1 class="hero-title">
-            Hi, I'm
-            <span class="gradient-text">Aniket Barai</span>
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="pill reveal"><i class="pulse"></i> Open to internships &amp; freelance work</span>
+          <h1 class="hero-title reveal">
+            <span class="line">Hi, I'm</span>
+            <span class="line gradient" id="scramble-name" data-text="Aniket Barai">Aniket Barai</span>
           </h1>
-
-          <h2 class="hero-subtitle">
-            I'm <span class="typing-text"></span>
-          </h2>
-
-          <p class="hero-description">
-            Passionate about building scalable web applications, solving complex problems, and creating impactful
-            digital experiences using modern technologies.
+          <h2 class="hero-sub reveal">I build <span class="typing" id="typing"></span><span class="caret"></span></h2>
+          <p class="hero-desc reveal">
+            Full-stack developer who ships real products: MERN e-commerce with admin dashboards, cinematic animated sites for clients, and
+            computer-vision experiments with OpenCV &amp; MediaPipe. Diploma student at 93.33%, building since 2023.
           </p>
-
-          <div class="hero-actions">
-            <a href="#portfolio" class="btn btn-primary">View Projects</a>
-            <a href="./Asset/AniketResume.pdf" download class="btn btn-secondary">Download Resume</a>
+          <div class="hero-cta reveal">
+            <a href="#projects" class="btn btn-primary" data-magnetic><span>View Projects</span><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+            <a href="./Asset/AniketBarai_Resume.pdf" download class="btn btn-ghost" data-magnetic><span>Download Resume</span></a>
           </div>
-
-          <div class="hero-stats">
-            <div class="stat-card">
-              <h3 class="counter" data-target="10">0</h3>
-              <p>Basic Projects Built</p>
-            </div>
-            <div class="stat-card">
-              <h3 class="counter" data-target="3">0</h3>
-              <p>Years Learning</p>
-            </div>
-            <div class="stat-card">
-              <h3 class="counter" data-target="5">0</h3>
-              <p>MERN Projects Built</p>
-            </div>
-          </div>
-      </section>
-      <!-- ABOUT -->
-      <section id="about" class="bento-panel reveal">
-        <h2 class="heading">About Me</h2>
-        <div class="neon-line"></div>
-        <p class="content">
-          I'm an aspiring Software Engineer currently pursuing a Diploma in Computer Engineering. My interests lie in
-          Full Stack Development, Data Structures & Algorithms, and building scalable software systems.
-        </p>
-        <p class="content">
-          I enjoy transforming ideas into real-world applications and continuously improving my technical skills through
-          projects, competitive programming, and hands-on learning.
-        </p>
-      </section>
-
-      <!-- SKILLS -->
-      <!-- TECHNICAL SKILLS MATRIX -->
-<section id="skills" class="bento-panel reveal">
-  <h2 class="heading">Technical Skills</h2>
-  <div class="neon-line"></div>
-  
-  <div class="skills-matrix">
-    
-    <!-- SUBSYSTEM 1: LANGUAGES -->
-    <div class="matrix-blade">
-      <div class="blade-header">
-        <span class="blade-index">01</span>
-        <h3 class="blade-title">Core Languages</h3>
-      </div>
-      <div class="tag-cloud">
-        <div class="matrix-tag"><span class="tag-status online"></span>Java</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>Python</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>C</div>
-      </div>
-    </div>
-
-    <!-- SUBSYSTEM 2: FRONTEND -->
-    <div class="matrix-blade">
-      <div class="blade-header">
-        <span class="blade-index">02</span>
-        <h3 class="blade-title">Frontend</h3>
-      </div>
-      <div class="tag-cloud">
-        <div class="matrix-tag"><span class="tag-status online"></span>React.js</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>Tailwind CSS</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>HTML5 / CSS3</div>
-      </div>
-    </div>
-
-    <!-- SUBSYSTEM 3: BACKEND & DATABASE -->
-    <div class="matrix-blade">
-      <div class="blade-header">
-        <span class="blade-index">03</span>
-        <h3 class="blade-title">Backend & Database</h3>
-      </div>
-      <div class="tag-cloud">
-        <div class="matrix-tag"><span class="tag-status online"></span>Node.js</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>Express.js</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>MongoDB</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>SQL</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>RESTful APIs</div>
-      </div>
-    </div>
-
-    <!-- SUBSYSTEM 4: TOOLS & DEV-OPS -->
-    <div class="matrix-blade">
-      <div class="blade-header">
-        <span class="blade-index">04</span>
-        <h3 class="blade-title">Tools & Architecture</h3>
-      </div>
-      <div class="tag-cloud">
-        <div class="matrix-tag"><span class="tag-status online"></span>Git & GitHub</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>Postman</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>VS Code</div>
-        <div class="matrix-tag"><span class="tag-status online"></span>Codex AI</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-      <!-- ACHIEVEMENTS -->
-      <section id="achievements" class="bento-panel reveal">
-        <h2 class="heading">Achievements</h2>
-        <div class="neon-line"></div>
-        <div class="achievement-grid">
-          <div class="achievement-card">
-            <h3>244+</h3>
-            <p>Coding Problems Solved on Multiple platforms.</p>
-          </div>
-          <div class="achievement-card">
-           <h3>1</h3>
-           <p>Developed a full-stack MERN e-commerce for CRAFTON Bag Company.</p>
-          </div>
-          <div class="achievement-card">
-            <h3>Multiple</h3>
-            <h4>Web Projects Built.</h4>
-            <p style="padding-top: 15px;">This strongs my developement skills.</p>
+          <div class="hero-stats reveal">
+            <div class="stat"><b class="counter" data-target="246" data-suffix="+">0</b><small>Problems solved</small></div>
+            <div class="stat"><b class="counter" data-target="2">0</b><small>Client projects shipped</small></div>
+            <div class="stat"><b class="counter" data-target="500" data-suffix="+">0</b><small>Products managed in admin</small></div>
           </div>
         </div>
-      </section>
 
-      <!-- EDUCATION -->
-      <!-- EDUCATION SECTION -->
-      <section id="education" class="bento-panel reveal">
-        <h2 class="heading">Education</h2>
-        <div class="neon-line"></div>
-        <div class="timeline">
+        <div class="hero-visual reveal">
+          <div class="portrait" id="portrait">
+            <div class="p-glow"></div>
+            <div class="p-stage">
+              <div class="p-orbit"><i></i></div>
+              <div class="p-ring"></div>
+              <div class="p-blob">
+                <img src="./Asset/aniketFinal.JPG" alt="Portrait of Aniket Barai" onerror="var p=this.parentNode;this.remove();p.classList.add('noimg')" />
+                <span class="p-initials">AB</span>
+                <div class="p-shade"></div>
+                <div class="p-scan"></div>
+              </div>
+              <div class="p-tag t1"><i class="pulse"></i>Open to work</div>
+              <div class="p-tag t2">MERN Developer</div>
+              <div class="p-tag t3">Mumbai, IN</div>
+            </div>
+          </div>
+          <div class="tilt code-card" data-tilt>
+            <div class="code-bar"><i></i><i></i><i></i><span>aniket.config.js</span></div>
+<pre class="code" id="code-block"><code><span class="k">const</span> <span class="v">aniket</span> = {
+  <span class="p">role</span>: <span class="s">"Full-Stack Developer"</span>,
+  <span class="p">stack</span>: [<span class="s">"React"</span>, <span class="s">"Node"</span>, <span class="s">"MongoDB"</span>],
+  <span class="p">location</span>: <span class="s">"Mumbai, IN"</span>,
+  <span class="p">shipping</span>: <span class="s">"client products"</span>,
+  <span class="p">exploring</span>: <span class="s">"computer vision"</span>,
+  <span class="p">openToWork</span>: <span class="n">true</span>,
+};</code></pre>
+            <div class="float-chip c1">React</div>
+            <div class="float-chip c2">Node.js</div>
+            <div class="float-chip c3">MongoDB</div>
+            <div class="float-chip c4">OpenCV</div>
+          </div>
+        </div>
+      </div>
+      <a href="#about" class="scroll-hint" aria-label="Scroll down"><span></span></a>
+    </section>
 
-          <!-- DIPLOMA NODE -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <div class="timeline-info">
-                  <span class="year">2024 - 2027</span>
-                  <h3>Diploma in Computer Engineering</h3>
-                  <p>Government Polytechnic Mumbai</p>
-                </div>
-                <span class="cyber-badge grade-badge dynamic-glow">Pursuing</span>
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Java</span><span>JavaScript</span><span>Python</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>PostgreSQL</span><span>Tailwind</span><span>OpenCV</span>
+        <span>Java</span><span>JavaScript</span><span>Python</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>PostgreSQL</span><span>Tailwind</span><span>Claude AI</span><span></span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <header class="sec-head reveal"><span class="eyebrow">01 / About</span><h2>Engineer who ships, not just studies.</h2></header>
+        <div class="about-grid">
+          <div class="spot-card reveal about-text">
+            <p>I'm a Computer Engineering diploma student at Government Polytechnic Mumbai, holding a <b> 93.33% </b> average, and a freelance full-stack developer since Feb 2026.</p>
+            <p>I've taken two client projects from requirements to deployment and handover. I handle the client conversations, the code and the deployment.</p>
+            <p>Right now I'm exploring AI & Tools</p>
+          </div>
+          <div class="spot-card reveal terminal">
+            <div class="code-bar"><i></i><i></i><i></i><span>terminal</span></div>
+            <div class="term-body" id="terminal">
+              <p><span class="pr">$</span> whoami</p>
+              <p class="out">aniket-barai</p>
+              <p><span class="pr">$</span> cat focus.txt</p>
+              <p class="out">MERN · REST APIs · JWT · Cloudinary · ImageKit</p>
+              <p><span class="pr">$</span> git log --oneline -3</p>
+              <p class="out">a41f9c2 ship CRAFTON admin dashboard<br/>7be03d1 add Framer Motion to Wedding Bingo<br/>c92aa10 start SignSpace gesture engine</p>
+              <p><span class="pr">$</span> <span class="caret"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="container">
+        <header class="sec-head reveal"><span class="eyebrow">02 / Arsenal</span><h2>My tech arsenal, <span class="gradient">battle-tested.</span></h2></header>
+
+        <div class="arsenal">
+          <!-- 3D GLOBE -->
+          <div class="spot-card globe-card reveal">
+            <div class="globe-top"><span class="live-dot"></span> TECH-SPHERE · <span id="globe-count">0</span> tools</div>
+            <canvas id="globe" aria-label="Interactive 3D cloud of technologies"></canvas>
+            <div class="globe-label" id="globe-label">Drag to spin · hover a tool</div>
+          </div>
+
+          <!-- DOSSIER -->
+          <div class="spot-card dossier reveal">
+            <div class="tabs" id="skill-tabs" role="tablist"></div>
+            <div class="rings" id="skill-rings"></div>
+            <div class="detail" id="skill-detail">
+              <span class="detail-tag" id="detail-tag">Select a skill</span>
+              <h4 id="detail-title">Hover or tap a ring</h4>
+              <p id="detail-text">Each ring shows my honest comfort level, with where I've actually used it.</p>
+              <div class="detail-used" id="detail-used"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ARCHITECTURE FLOW -->
+        <div class="spot-card flow reveal">
+          <div class="flow-head"><span class="eyebrow">How I ship a product</span><small>Request lifecycle of my MERN apps</small></div>
+          <div class="flow-track">
+            <div class="fnode"><b>⚛</b><span>React UI</span><small>Tailwind · Framer</small></div>
+            <div class="fwire"><i></i></div>
+            <div class="fnode"><b>⇄</b><span>REST API</span><small>Axios · JSON</small></div>
+            <div class="fwire"><i></i></div>
+            <div class="fnode"><b>⬢</b><span>Express + JWT</span><small>Role-based access</small></div>
+            <div class="fwire"><i></i></div>
+            <div class="fnode"><b>◉</b><span>MongoDB</span><small>Mongoose models</small></div>
+            <div class="fwire"><i></i></div>
+            <div class="fnode"><b>☁</b><span>Cloudinary / ImageKit</span><small>Optimised media</small></div>
+          </div>
+          <div class="flow-foot"><span>Frontend on <b>Vercel</b></span><span>API on <b>Render</b></span><span>Tested with <b>Postman</b></span><span>Versioned with <b>Git</b></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <header class="sec-head reveal"><span class="eyebrow">03 / Projects</span><h2>Things I've shipped.</h2></header>
+
+        <div class="filters reveal" id="filters">
+          <button class="active" data-filter="all">All</button>
+          <button data-filter="client">Client</button>
+          <button data-filter="ai">AI / Vision</button>
+          <button data-filter="mern">MERN</button>
+          <button data-filter="frontend">Frontend</button>
+        </div>
+
+        <div class="projects" id="projects-grid">
+          <article class="project tilt spot-card reveal" data-tilt data-cat="client mern">
+            <div class="p-img"><img src="./Asset/crafton_home.PNG" alt="CRAFTON e-commerce" loading="lazy" /><span class="tag">Client · Live</span></div>
+            <div class="p-body">
+              <h3>CRAFTON E-commerce</h3>
+              <p>Full-stack store for a bag company: product browsing, cart, order tracking and warranty-claim workflows. Role-based admin dashboard managing 500+ products, with JWT auth and Cloudinary image delivery.</p>
+              <div class="stack"><span>MERN</span><span>Cloudinary</span><span>JWT</span><span>Vercel</span><span>Render</span></div>
+              <div class="p-links">
+                <a href="https://craftonbags.com" target="_blank" rel="noopener" class="btn btn-primary sm"><span>Live Demo</span></a>
+                <a href="https://github.com/aniketbarai/craftonbags" target="_blank" rel="noopener" class="btn btn-ghost sm">Source</a></div>
+            </div>
+          </article>
+
+          <article class="project tilt spot-card reveal" data-tilt data-cat="client mern frontend">
+            <div class="p-img"><img src="./Asset/wb_home.PNG" alt="Wedding Bingo" loading="lazy" /><span class="tag">Client · Live</span></div>
+            <div class="p-body">
+              <h3>Wedding Bingo</h3>
+              <p>Cinematic wedding portfolio with galleries, love stories, testimonials, packages and booking inquiries. Admin panel for content, ImageKit delivery and Framer Motion animations.</p>
+              <div class="stack"><span>MERN</span><span>ImageKit</span><span>Framer Motion</span></div>
+              <div class="p-links">
+                <a href="https://weddingbingo.in" target="_blank" rel="noopener" class="btn btn-primary sm"><span>Live Demo</span></a>
+                <a href="https://github.com/aniketbarai/WeddingBingo" target="_blank" rel="noopener" class="btn btn-ghost sm">Source</a>
               </div>
             </div>
-          </div>
+          </article>
 
-          <!-- SSC NODE -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <div class="timeline-info">
-                  <span class="year">2023 - 2024</span>
-                  <h3>Secondary School Certificate (SSC)</h3>
-                  <p>Guru Nanak High School</p>
-                </div>
-                <span class="cyber-badge grade-badge">90%</span>
+          <article class="project tilt spot-card reveal" data-tilt data-cat="ai">
+            <div class="p-img art-vision" aria-label="SignSpace"><div class="hand-art"><i></i><i></i><i></i><i></i><i></i></div><span class="tag">In progress</span></div>
+            <div class="p-body">
+              <h3>SignSpace</h3>
+              <p>Gesture-controlled AI app with real-time hand tracking, an air-drawing canvas and live emotion detection using OpenCV and MediaPipe.</p>
+              <div class="stack"><span>Python</span><span>OpenCV</span><span>MediaPipe</span><span>ML</span></div>
+            </div>
+          </article>
+
+          <article class="project tilt spot-card reveal" data-tilt data-cat="mern ai">
+            <div class="p-img"><img src="./Asset/intervp.PNG" alt="Interview PrepAI" loading="lazy" /><span class="tag">MERN</span></div>
+            <div class="p-body">
+              <h3>Interview PrepAI</h3>
+              <p>AI-powered interview prep that generates role- and experience-specific questions with clear answers and explanations for structured revision.</p>
+              <div class="stack"><span>MERN</span><span>Firebase Auth</span><span>AI</span></div>
+              <div class="p-links">
+                <a href="https://interview-prep-ai-rho.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary sm"><span>Live Demo</span></a>
+                <a href="https://github.com/aniketbarai/Interview-Prep-AI" target="_blank" rel="noopener" class="btn btn-ghost sm">Source</a>
               </div>
+            </div>
+          </article>
+
+          <article class="project tilt spot-card reveal" data-tilt data-cat="mern">
+            <div class="p-img"><img src="./Asset/hw.PNG" alt="HackAware" loading="lazy" /><span class="tag">Cybersecurity</span></div>
+            <div class="p-body">
+              <h3>HackAware</h3>
+              <p>Interactive cybersecurity demonstration and prevention platform for educational threat awareness and mitigation strategies.</p>
+              <div class="stack"><span>MERN</span><span>Security</span></div>
+              <div class="p-links"><a href="https://github.com/primecodestudio74-ui/CyberAttacks" target="_blank" rel="noopener" class="btn btn-ghost sm">Source</a></div>
+            </div>
+          </article>
+
+          <article class="project tilt spot-card reveal" data-tilt data-cat="frontend">
+            <div class="p-img"><img src="./Asset/ochi.PNG" alt="Ochi clone" loading="lazy" /><span class="tag">UI / Animation</span></div>
+            <div class="p-body">
+              <h3>Ochi Design Homepage</h3>
+              <p>Pixel-focused homepage clone of ochi.design built to sharpen layout precision and scroll-driven animation skills.</p>
+              <div class="stack"><span>React</span><span>UI-UX</span><span>Animations</span></div>
+              <div class="p-links">
+                <a href="https://ochi-me.vercel.app" target="_blank" rel="noopener" class="btn btn-primary sm"><span>Live Demo</span></a>
+                <a href="https://github.com/aniketbarai/ochi" target="_blank" rel="noopener" class="btn btn-ghost sm">Source</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="center reveal"><a href="https://github.com/aniketbarai" target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic><span>More on GitHub</span></a></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="container">
+        <header class="sec-head reveal"><span class="eyebrow">04 / Experience</span><h2>Real clients. <span class="gradient">Real deployments.</span></h2></header>
+
+        <article class="exp-main spot-card reveal">
+          <div class="exp-top">
+            <div class="exp-id">
+              <div class="exp-logo">AB</div>
+              <div>
+                <h3>Freelance Full-Stack Developer</h3>
+                <p>Self-employed · Mumbai, India</p>
+              </div>
+            </div>
+            <div class="exp-meta">
+              <span class="date">Feb 2026 - Present</span>
+              <span class="live-badge"><i class="pulse"></i><b id="exp-months">8</b> months and counting</span>
             </div>
           </div>
 
-        </div>
-      </section>
-  <!-- EXTRA-CURRICULAR & LEADERSHIP SECTION -->
-<section id="activities" class="bento-panel reveal">
-  <h2 class="heading">Extra-Curricular Activities</h2>
-  <div class="neon-line"></div>
-  
-  <div class="activities-wrapper">
-    
-    <!-- NODE 1: LEADERSHIP EXPERIENCE -->
-    <div class="activity-node">
-      <div class="activity-timeline-marker">
-        <div class="marker-core glow-active"></div>
-        <div class="marker-line"></div>
-      </div>
-      
-      <div class="activity-body">
-        <div class="activity-meta">
-          <span class="activity-role">Class Representative (CR)</span>
-          <span class="activity-duration">2nd & 3rd Semester</span>
-        </div>
-        <h3 class="activity-context">Academic Leadership & Administration</h3>
-        <p class="activity-desc">
-          Elected to orchestrate seamless communication pipelines between a cohort of students and department faculty. Streamlined daily academic operations, coordinated schedules, and managed logistics for class-wide technical activities and events.
-        </p>
-      </div>
-    </div>
-
-    <!-- NODE 2: ACHIEVEMENTS & COMPETITIONS -->
-    <div class="activity-node">
-      <div class="activity-timeline-marker">
-        <div class="marker-core glow-active"></div>
-        <div class="marker-line no-line"></div> <!-- 'no-line' hides the tracking tail for the last item -->
-      </div>
-      
-      <div class="activity-body">
-        <div class="activity-meta">
-          <span class="activity-role">Hackathons & Technical Events</span>
-          <span class="activity-duration">6+ Competitions</span>
-        </div>
-        <h3 class="activity-context">Achievements & Technical Track Record</h3>
-        <p class="activity-desc">
-          Actively participated in multiple competitive tech ecosystem tracks, including specialized algorithm coding challenges, core engineering quizzes, and rapid innovation-based hackathons to continuously pressure-test full-stack problem-solving speed under fixed timelines.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-      <!-- PROJECTS -->
-      <section id="portfolio" class="bento-panel reveal">
-  <div class="portfolio-header">
-    <h2 class="heading">Featured Projects</h2>
-    <div class="neon-line"></div>
-  </div>
-
-  <div class="project-container">
-    <div class="project-card">
-      <div class="project-image">
-        <img src="./Asset/intervp.PNG" alt="img">
-        <div class="project-overlay">
-          <span class="badge security">MERN</span>
-        </div>
-      </div>
-      <div class="project-info">
-        <h3>Interview PrepAI</h3>
-        <p>An AI-powered interview preparation platform that generates role- and experience-specific interview questions with high-quality answers and explanations. Designed for structured learning, quick revision, and focused interview readiness.</p>
-        <div class="tech-stack">
-          <span>MERN Stack</span>
-          <span>FIREBASE AUTH</span>
-        </div>
-        <div class="project-links">
-          <a href="https://interview-prep-ai-rho.vercel.app/" class="btn btn-primary" aria-label="Demo">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-          <a href="https://github.com/aniketbarai/Interview-Prep-AI" class="btn btn-secondary" aria-label="codes">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-    </div>
-<div class="project-card featured">
-      <div class="project-image">
-        <img src="./Asset/crftn.PNG" alt="img">
-        <div class="project-overlay">
-          <span class="badge security">Sponsored</span>
-          <span class="badge security">Work in progress!</span>
-        </div>
-      </div>
-      <div class="project-info">
-        <h3>Crafton Bags</h3>
-        <p>CraftonBags — A modern MERN-based e-commerce platform for stylish bags with authentication, cart, admin dashboard, and scalable architecture.</p>
-        <div class="tech-stack">
-          <span>MERN Stack</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/aniketbarai/craftonbags" class="btn btn-secondary" aria-label="Source code">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="project-card featured">
-      <div class="project-image">
-        <img src="./Asset/hw.PNG" alt="HackAware Cybersecurity Platform">
-        <div class="project-overlay">
-          <span class="badge security">Cybersecurity</span>
-          <span class="badge security">Work in progress!</span>
-        </div>
-      </div>
-      <div class="project-info">
-        <h3>HackAware</h3>
-        <p>An interactive cybersecurity demonstration and prevention system engineered for educational threat awareness and mitigation strategies.</p>
-        <div class="tech-stack">
-          <span>MERN Stack</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/primecodestudio74-ui/CyberAttacks" class="btn btn-secondary" aria-label="codes">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="project-card featured">
-      <div class="project-image">
-        <img src="./Asset/wb.PNG" alt="img">
-        <div class="project-overlay">
-          <span class="badge core">Sponsored</span>
-          <span class="badge security">Work in progress!</span>
-        </div>
-      </div>
-      <div class="project-info">
-        <h3>WeddingBingo</h3>
-        <p>Wedding Bingo is a premium wedding photography website that showcases cinematic wedding photography services. The frontend is built as a modern, interactive application with smooth scroll-based animations and a sophisticated dark theme design.</p>
-        <div class="tech-stack">
-          <span>MERN Stack</span>
-        </div>
-        <div class="project-links">
-          <a href="https://weddingbingoun.netlify.app/" class="btn btn-primary" aria-label="Live Demo">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-          <a href="https://github.com/aniketbarai/WeddingBingo" class="btn btn-secondary" aria-label="Source code">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-image">
-        <img src="./Asset/ochi.PNG" alt="img">
-        <div class="project-overlay">
-          <span class="badge ui-ux">UI-UX</span>
-        </div>
-      </div>
-      <div class="project-info">
-        <h3>Ochi Design Homepage</h3>
-        <p>I created the homepage clone of <a href="https://ochi.design/" style="color: antiquewhite; text-decoration: none;"><span>ochi.design</span></a> website. This strongs my frontend skill and designs skill with animations.</p>
-        <div class="tech-stack">
-          <span>React</span>
-          <span>UI-UX</span>
-          <span>Animations</span>
-        </div>
-        <div class="project-links">
-          <a href="https://ochi-me.vercel.app" class="btn btn-primary" aria-label="Live Demo">
-            <i class="fas fa-external-link-alt"></i> Live Demo
-          </a>
-          <a href="https://github.com/aniketbarai/ochi" class="btn btn-secondary" aria-label="Source code">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-image">
-        <img src="./Asset/banks.PNG" alt="img">
-        <div class="project-overlay">
-          <span class="badge core">Logic Based</span>
-        </div>
-      </div>
-      <div class="project-info">
-        <h3>Console-Based Bank System</h3>
-        <p>A secure banking logic simulation built to master object-oriented principles, robust exception handling, and data integrity.</p>
-        <div class="tech-stack">
-          <span>Java</span>
-          <span>OOPs</span>
-          <span>CLI</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/aniketbarai/JavaDevelopment/tree/main/BankProject" class="btn btn-secondary" aria-label="Source code">
-            <i class="fab fa-github"></i> Source
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="project-links">
-          <a href="https://github.com/aniketbarai" class="btn btn-secondary" aria-label="Github">
-            <i class="fab fa-github"></i> Many others...
-          </a>
-        </div>
-
-  </div>
-</section>
-
-      <!-- CONTACT -->
-      <section id="contact" class="bento-panel reveal">
-        <h2 class="heading">Contact</h2>
-        <div class="neon-line"></div>
-        <div class="contact-grid">
-          <div class="contact-box">
-            <h4>Email</h4>
-            <p>aniketbarai677@gmail.com</p>
+          <div class="exp-kpis">
+            <div><b class="counter" data-target="2">0</b><small>Client projects delivered</small></div>
+            <div><b class="counter" data-target="500" data-suffix="+">0</b><small>Products managed via admin dashboard</small></div>
+            <div><b>End-to-end</b><small>Requirements to handover</small></div>
           </div>
-          <div class="contact-box">
-            <h4>Phone</h4>
-            <p>+91 7304414905</p>
+
+          <div class="exp-flow" aria-label="Project lifecycle I own">
+            <div class="step" style="--i:0"><i>1</i><span>Requirements</span></div>
+            <div class="step" style="--i:1"><i>2</i><span>Development</span></div>
+            <div class="step" style="--i:2"><i>3</i><span>Deployment</span></div>
+            <div class="step" style="--i:3"><i>4</i><span>Handover</span></div>
           </div>
-          <div class="contact-box">
-            <h4>Location</h4>
-            <p>Mumbai, India</p>
+
+          <ul class="ticks">
+            <li>Delivered two client projects from requirements gathering and development to deployment and handover, covering e-commerce and wedding portfolio use cases.</li>
+            <li>Managed client communication, feature implementation, debugging and deployment while handling multiple projects simultaneously.</li>
+          </ul>
+        </article>
+
+        <div class="deliver-grid">
+          <article class="spot-card deliver reveal">
+            <div class="deliver-head"><span class="date">Mar 2026 - Oct 2026</span><span class="chip-live">Client</span></div>
+            <h3>CRAFTON · E-commerce Platform</h3>
+            <ul class="ticks">
+              <li>Built and deployed a full-stack store with product browsing, cart management, order tracking and warranty-claim workflows.</li>
+              <li>Created a role-based admin dashboard managing 500+ products, orders and customers, with JWT authentication and Cloudinary image delivery.</li>
+            </ul>
+            <div class="stack"><span>MERN</span><span>Cloudinary</span><span>REST APIs</span><span>Vercel</span><span>Render</span></div>
+          </article>
+
+          <article class="spot-card deliver reveal">
+            <div class="deliver-head"><span class="date">Feb 2026 - Oct 2026</span><span class="chip-live">Client</span></div>
+            <h3>Wedding Bingo · Portfolio Platform</h3>
+            <ul class="ticks">
+              <li>Built and deployed a responsive wedding portfolio with galleries, love stories, testimonials, service packages and booking inquiries.</li>
+              <li>Developed an admin dashboard for content management, with ImageKit image delivery and Framer Motion interactive animations.</li>
+            </ul>
+            <div class="stack"><span>MERN</span><span>ImageKit</span><span>Framer Motion</span></div>
+          </article>
+        </div>
+
+        <article class="spot-card lead reveal">
+          <div class="lead-icon">★</div>
+          <div class="lead-body">
+            <div class="deliver-head"><span class="date">Jul 2025 - Dec 2026</span><span class="chip-live alt">Leadership</span></div>
+            <h3>Class Representative · Government Polytechnic Mumbai</h3>
+            <p>Served three consecutive semesters, coordinating academic activities and communicating student concerns to faculty, and supporting coordination between students and faculty for academic updates and classroom communication.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="container">
+        <header class="sec-head reveal"><span class="eyebrow">05 / Education</span><h2>Strong foundations, <span class="gradient">strong grades.</span></h2></header>
+        <div class="edu-grid">
+
+          <article class="spot-card edu-card reveal" style="--p:93.33">
+            <div class="edu-ring">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="eduGrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:rgb(var(--a))"/><stop offset="1" style="stop-color:rgb(var(--b))"/></linearGradient></defs><circle class="trk" cx="50" cy="50" r="44"/><circle class="val" cx="50" cy="50" r="44" stroke="url(#eduGrad1)"/></svg>
+              <div class="edu-score"><b class="counter" data-target="93.33" data-dec="2" data-suffix="%">0</b><small>current</small></div>
+            </div>
+            <div class="edu-body">
+              <span class="date">Sep 2024 - Present</span>
+              <h3>Diploma in Computer Engineering</h3>
+              <h4>Government Polytechnic Mumbai</h4>
+              <span class="live-badge"><i class="pulse"></i>Currently pursuing</span>
+            </div>
+          </article>
+
+          <article class="spot-card edu-card reveal" style="--p:90">
+            <div class="edu-ring">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="eduGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:rgb(var(--a))"/><stop offset="1" style="stop-color:rgb(var(--b))"/></linearGradient></defs><circle class="trk" cx="50" cy="50" r="44"/><circle class="val" cx="50" cy="50" r="44" stroke="url(#eduGrad2)"/></svg>
+              <div class="edu-score"><b class="counter" data-target="90" data-dec="2" data-suffix="%">0</b><small>final</small></div>
+            </div>
+            <div class="edu-body">
+              <span class="date">March 2024</span>
+              <h3>SSC Board</h3>
+              <h4>Guru Nanak High School, Mumbai</h4>
+              <span class="live-badge done">Completed</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section">
+      <div class="container">
+        <header class="sec-head reveal"><span class="eyebrow">06 / Achievements</span><h2>Proof of work.</h2></header>
+        <div class="ach-grid">
+          <div class="spot-card ach reveal"><b>1<sup>st</sup></b><p>Technical Quiz winner among 20 teams</p></div>
+          <div class="spot-card ach reveal"><b>#9</b><p>GeeksforGeeks campus rank out of 172 users</p></div>
+          <div class="spot-card ach reveal"><b class="counter" data-target="246" data-suffix="+">0</b><p>Coding problems solved across platforms</p></div>
+          <div class="spot-card ach reveal"><b class="counter" data-target="10" data-suffix="+">0</b><p>Technical events and hackathons joined</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="cta spot-card reveal">
+          <span class="eyebrow">07 / Contact</span>
+          <h2>Let's build something <span class="gradient">impossible to ignore.</span></h2>
+          <p>Hiring for an internship, or need a product shipped? My inbox is open.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:aniketbarai678@gmail.com" data-magnetic><span>aniketbarai678@gmail.com</span></a>
+            <a class="btn btn-ghost" href="tel:+917304414905" data-magnetic><span>+91 73044 14905</span></a>
+          </div>
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/aniketbarai/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/aniketbarai" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://codolio.com/profile/aniketbarai" target="_blank" rel="noopener">Codolio</a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-      <!-- FOOTER -->
-      <footer class="footer-wrapper">
-        <h3>Aniket Barai</h3>
-        <small>© 2026 All Rights Reserved</small>
-      </footer>
+  <footer class="footer">
+    <p>Designed &amp; built by <b>Aniket Barai</b> · Mumbai · © 2026</p>
+    <button id="to-top" class="btn btn-ghost sm">Back to top ↑</button>
+  </footer>
 
-    </main>
-  </div>
+  <div class="toast" id="toast"></div>
+  <div class="bot-stack" id="bot-stack" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
-
 </html>
