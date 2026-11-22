@@ -59,7 +59,7 @@ export default function App() {
     return () => cancelAnimationFrame(frame);
   }, [introOpen]);
 
-  return introOpen ? <AvailabilityIntro onClose={closeIntro} /> : <PortfolioSite />;
+  return introOpen ? <AvailabilityIntro onClose={closeIntro} /> : <div className="site-enter"><PortfolioSite /></div>;
 }
 
 function PortfolioSite() {
@@ -292,7 +292,7 @@ function PortfolioSite() {
               <div data-reveal>
                 <h3 className="eyebrow education-grid__label">EDUCATION / 01—02</h3>
                 <article className="education-entry"><span className="eyebrow">SEP 2024 — PRESENT</span><h4>Diploma in Computer Engineering</h4><p>Government Polytechnic Mumbai</p><strong>93.33% <span>AVERAGE</span></strong></article>
-                <article className="education-entry"><span className="eyebrow">MAR 2024</span><h4>SSC Board</h4><p>Guru Nanak High School, Mumbai</p></article>
+                <article className="education-entry"><span className="eyebrow">MAR 2024</span><h4>SSC Board</h4><p>Guru Nanak High School, Mumbai</p><strong>90% <span>SSC SCORE</span></strong></article>
               </div>
               <div data-reveal>
                 <h3 className="eyebrow education-grid__label">NOTABLE MOMENTS / 01—02</h3>
