@@ -21,3 +21,7 @@ This repository is a collection of everything I’ve learned and built as I expl
 ## 🧩 Structure
 
 Each folder represents a milestone or mini project:
+
+### Featured: Aniket Barai portfolio
+
+The deployable React/Vite portfolio lives in [`Portfolio/`](Portfolio/). See its [README](Portfolio/README.md) for the full file structure, development commands, motion/accessibility notes, and Vercel instructions. When importing this repository into Vercel, set **Root Directory** to `Portfolio`.

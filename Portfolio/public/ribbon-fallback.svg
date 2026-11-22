@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 650" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="front" x1="75" y1="130" x2="574" y2="495" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffb48b"/><stop offset=".32" stop-color="#ff6e29"/><stop offset=".68" stop-color="#ff4d00"/><stop offset="1" stop-color="#b93200"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="198" y1="575" x2="510" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fc874e"/><stop offset=".46" stop-color="#ff4d00"/><stop offset="1" stop-color="#b32b00"/>
+    </linearGradient>
+  </defs>
+  <path d="M99 500C78 374 117 223 237 157c119-66 277-28 333 87 48 99-12 183-98 193-71 8-122-43-183-41l-10-80c62-14 119 43 177 33 48-8 58-53 30-99-43-69-143-87-216-40-75 48-94 147-81 267l-90 23Z" fill="url(#front)"/>
+  <path d="M286 316c70-15 126 39 174 33 36-5 60-34 45-70 24 37 2 93-47 102-57 10-100-22-170-13l-2-52Z" fill="#b52c00" opacity=".24"/>
+  <path d="M281 340c-30 86 10 170 88 202 41 17 92 20 142 8l20-84c-53 23-97 12-123-11-34-31-43-65-33-110l-94-5Z" fill="url(#fold)"/>
+  <path d="M270 207c-73 47-94 147-81 267" stroke="#ffd5b9" stroke-opacity=".42" stroke-width="9" stroke-linecap="round"/>
+</svg>
