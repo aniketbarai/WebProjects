@@ -63,10 +63,11 @@ export default function ProjectDetail({ project, onClose, reduced }) {
         </div>
         <div className="detail-view__bottom">
           <div className="detail-view__tags">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
-          <div className="detail-view__links">
-            {project.live && <a href={project.live} target="_blank" rel="noopener noreferrer">VISIT LIVE SITE <span aria-hidden="true">↗</span></a>}
-            {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">VIEW SOURCE <span aria-hidden="true">↗</span></a>}
-          </div>
+          {project.live && (
+            <div className="detail-view__links">
+              <a href={project.live} target="_blank" rel="noopener noreferrer">VISIT LIVE SITE <span aria-hidden="true">↗</span></a>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>, document.body,

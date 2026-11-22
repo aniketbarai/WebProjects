@@ -34,9 +34,9 @@ export default function ProjectCard({ project, index, onSelect, onFocus, interac
             <p className="font-serif">{project.descriptor}</p>
           </div>
           <div className="project-card__links">
-            {project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} live site, opens in a new tab`} data-cursor="OPEN">LIVE ↗</a>}
-            {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} source code, opens in a new tab`} data-cursor="OPEN">CODE ↗</a>}
-            {!project.live && !project.source && <span className="eyebrow">IN PROGRESS</span>}
+            {project.live
+              ? <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} live site, opens in a new tab`} data-cursor="OPEN">LIVE ↗</a>
+              : <span className="eyebrow">{project.status}</span>}
           </div>
         </div>
       </div>

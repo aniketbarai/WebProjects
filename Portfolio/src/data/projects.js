@@ -22,7 +22,6 @@ export const projects = [
     ],
     stack: ['React', 'Node.js', 'MongoDB', 'JWT', 'Cloudinary'],
     live: 'https://craftonbags.com',
-    source: 'https://github.com/aniketbarai/craftonbags',
   },
   {
     slug: 'wedding-bingo',
@@ -45,7 +44,6 @@ export const projects = [
     ],
     stack: ['MERN', 'ImageKit', 'Framer Motion'],
     live: 'https://weddingbingo.in',
-    source: 'https://github.com/aniketbarai/WeddingBingo',
   },
   {
     slug: 'signspace',
@@ -84,14 +82,13 @@ export const projects = [
     ],
     stack: ['MERN', 'AI', 'Firebase Auth'],
     live: 'https://interview-prep-ai-rho.vercel.app/',
-    source: 'https://github.com/aniketbarai/Interview-Prep-AI',
   },
   {
     slug: 'hackaware',
     name: 'HackAware',
     descriptor: 'Security starts with awareness.',
     category: 'Independent / Security',
-    status: 'Source',
+    status: 'Case study',
     featured: false,
     image: '/Asset/hw.PNG',
     webp: '/Asset/hw.webp',
@@ -105,7 +102,6 @@ export const projects = [
       'Focuses on threat awareness and practical prevention strategies.',
     ],
     stack: ['MERN', 'Cybersecurity'],
-    source: 'https://github.com/primecodestudio74-ui/CyberAttacks',
   },
   {
     slug: 'ochi',
@@ -127,6 +123,5 @@ export const projects = [
     ],
     stack: ['React', 'UI', 'Animation'],
     live: 'https://ochi-me.vercel.app',
-    source: 'https://github.com/aniketbarai/ochi',
   },
 ];
