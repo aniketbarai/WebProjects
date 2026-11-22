@@ -1,6 +1,6 @@
 # Aniket Barai — editorial portfolio
 
-A deployable single-page portfolio for a Mumbai-based full-stack developer. Built with React 19, Vite 8, Tailwind CSS, GSAP/ScrollTrigger, Lenis, Three.js via React Three Fiber + drei, and Framer Motion. The palette uses paper `#F5F2EB`, near-black `#171714`, and electric orange `#FF4D00`. All existing `/Asset/*` URLs are preserved.
+A deployable single-page portfolio for Aniket Barai, a Mumbai-based full-stack developer and founder of PrimeCodeStudio. Built with React 19, Vite 8, Tailwind CSS, GSAP/ScrollTrigger, Lenis, Three.js via React Three Fiber + drei, and Framer Motion. The palette uses paper `#F5F2EB`, near-black `#171714`, and electric orange `#FF4D00`. All existing `/Asset/*` URLs are preserved.
 
 ## Project structure / complete source map
 
@@ -64,8 +64,8 @@ The preview command serves `dist/` (normally on port 4173). No environment varia
 1. **Publish these workspace changes first**: commit and push the current working branch, then merge it into the branch Vercel should deploy (usually `main`). Alternatively, tell Vercel to deploy that pushed branch. Importing the untouched `main` before this step would deploy the old site.
 2. Import the `aniketbarai/WebProjects` repository from GitHub into Vercel. Set **Root Directory** to **`Portfolio`** (not the repository root). Select **Vite** as the framework.
 3. Use Node.js **22.x**. Install command: `npm ci`. Build command: `npm run build`. Output directory: `dist`. These match [`vercel.json`](vercel.json).
-4. Deploy. `vite.config.js` emits all original files into `dist/Asset/`, so `/Asset/Aniket_Barai_CV.pdf`, `/Asset/aniketFinal.JPG` and the original PNG URLs continue to work.
-5. After Vercel assigns a permanent domain, change the `og:image` and `twitter:image` URLs in [`index.html`](index.html) to their **absolute** `https://your-domain/Asset/aniketFinal.JPG` form (and add `og:url` if desired). Social crawlers vary in their handling of relative preview-image URLs.
+4. Deploy. `vite.config.js` emits all original files into `dist/Asset/`, so `/Asset/Aniket_Barai_CV.pdf`, the new `/Asset/Aniket_latest.jpg`, the former `/Asset/aniketFinal.JPG`, and the original PNG URLs continue to work.
+5. After Vercel assigns a permanent domain, change the `og:image` and `twitter:image` URLs in [`index.html`](index.html) to their **absolute** `https://your-domain/Asset/aniketFinal.JPG` form (and add `og:url` if desired). The new photo is used only in the existing framed portrait slot; social-preview metadata retains its previous image. Social crawlers vary in their handling of relative preview-image URLs.
 
 The Arena preview URL is for review; it is not a permanent Vercel deployment. Edit [`src/data/projects.js`](src/data/projects.js) to change project case studies and [`src/App.jsx`](src/App.jsx) to change section copy. Keep existing filenames in `Asset/` for backwards compatibility. Optimized WebP images are selected through `<picture>` while the originals remain fallbacks.
 

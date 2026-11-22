@@ -53,7 +53,7 @@ export default function MobileMenu({ links, active, scrollTo, setMenuOpen, reduc
       transition={transition}>
       <div className="mobile-menu__top page-gutter">
         <span className="eyebrow">NAVIGATION / 2026</span>
-        <button type="button" onClick={() => close()} className="mobile-menu__close" aria-label="Close menu">CLOSE <span aria-hidden="true">×</span></button>
+        <button type="button" onClick={() => close()} className="mobile-menu__close" aria-label="Close menu"><span aria-hidden="true">×</span></button>
       </div>
       <nav aria-label="Mobile navigation" className="mobile-menu__links page-gutter">
         {links.map(([id, title], index) => (

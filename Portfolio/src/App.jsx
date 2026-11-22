@@ -144,11 +144,17 @@ export default function App() {
               <p className="hero__overline eyebrow hero-reveal">ANIKET BARAI <span aria-hidden="true">/</span> MUMBAI, INDIA</p>
               <h1 id="hero-title" className="hero__title font-display">
                 <MaskLine hero>Full-stack</MaskLine>
-                <MaskLine hero>developer who</MaskLine>
-                <MaskLine hero>ships <em className="font-serif">real</em> products<span className="accent-dot">.</span></MaskLine>
+                <MaskLine hero>developer <em className="font-serif">&amp;</em></MaskLine>
+                <MaskLine hero>founder<span className="accent-dot">.</span></MaskLine>
               </h1>
               <div className="hero__summary hero-reveal">
-                <p>I'm Aniket — a full-stack MERN developer turning ambitious ideas into products people can actually use.</p>
+                <div className="hero__profile">
+                  <p className="hero__studio"><span className="eyebrow">FOUNDER @</span><strong className="font-display">PrimeCodeStudio<span className="accent-dot">.</span></strong></p>
+                  <dl className="hero__profile-list">
+                    <div><dt>MERN SPECIALIST</dt><dd>React · MongoDB</dd></div>
+                    <div><dt>UPSKILLING</dt><dd>AI/ML · DevOps</dd></div>
+                  </dl>
+                </div>
                 <div className="hero__actions">
                   <a href="#projects" onClick={event => navigate(event, 'projects')} className="button button--primary" data-magnetic data-cursor="GO">VIEW WORK <span aria-hidden="true">↗</span></a>
                   <a href="/Asset/Aniket_Barai_CV.pdf" download className="button button--text" data-magnetic data-cursor="GET">DOWNLOAD RESUME <span aria-hidden="true">↘</span></a>
@@ -157,7 +163,11 @@ export default function App() {
             </div>
             <figure className="hero__portrait hero-reveal">
               <div className="hero__portrait-frame" data-unveil>
-                <picture><source srcSet="/Asset/aniketFinal-sm.webp" media="(max-width: 640px)" type="image/webp" /><img src="/Asset/aniketFinal.JPG" alt="Portrait of Aniket Barai" width="645" height="645" fetchPriority="high" /></picture>
+                <picture>
+                  <source srcSet="/Asset/Aniket_latest-sm.webp" media="(max-width: 640px)" type="image/webp" />
+                  <source srcSet="/Asset/Aniket_latest.webp" type="image/webp" />
+                  <img src="/Asset/Aniket_latest.jpg" alt="Aniket Barai holding an award outdoors" width="1592" height="1592" fetchPriority="high" />
+                </picture>
               </div>
               <figcaption className="eyebrow"><span>FIG. 01 — THE PERSON BEHIND THE PIXELS</span><span>19° 04′ N / 72° 53′ E</span></figcaption>
             </figure>
