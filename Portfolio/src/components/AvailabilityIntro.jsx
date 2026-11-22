@@ -1,17 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const EXIT_DURATION = 420;
-const AUTO_CLOSE_DELAY = 15_000;
+const EXIT_DURATION = 700;
+const AUTO_CLOSE_DELAY = 5_000;
 
-// The portfolio stays unmounted until the card finishes its closing transition.
-export default function AvailabilityIntro({ onClose }) {
+// The site is visible but inert behind the frosted overlay until dismissal.
+export default function AvailabilityIntro({ onClose, onBeginClose }) {
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const exitTimer = useRef(null);
   const autoCloseTimer = useRef(null);
   const closingRef = useRef(false);
   const [closing, setClosing] = useState(false);
-  const [autoClosePaused, setAutoClosePaused] = useState(false);
 
   const dismiss = useCallback(() => {
     if (closingRef.current) return;
@@ -22,21 +21,16 @@ export default function AvailabilityIntro({ onClose }) {
       return;
     }
     setClosing(true);
+    onBeginClose();
     // Keep focus on the closing control until the new page is ready to receive it.
     closeRef.current?.focus({ preventScroll: true });
     exitTimer.current = window.setTimeout(onClose, EXIT_DURATION);
-  }, [onClose]);
+  }, [onClose, onBeginClose]);
 
   useEffect(() => {
-    if (autoClosePaused) return undefined;
     autoCloseTimer.current = window.setTimeout(dismiss, AUTO_CLOSE_DELAY);
     return () => clearTimeout(autoCloseTimer.current);
-  }, [autoClosePaused, dismiss]);
-
-  function toggleAutoClose() {
-    clearTimeout(autoCloseTimer.current);
-    setAutoClosePaused(paused => !paused);
-  }
+  }, [dismiss]);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => closeRef.current?.focus());
@@ -73,17 +67,14 @@ export default function AvailabilityIntro({ onClose }) {
   }, [dismiss]);
 
   return (
-    <div className="intro-screen">
+    <div className={`intro-screen${closing ? ' intro-screen--closing' : ''}`}>
       <section ref={dialogRef} className={`intro-card${closing ? ' intro-card--closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="intro-title" aria-describedby="intro-copy intro-timing">
         <header className="intro-card__top">
           <span className="intro-card__brand font-display">ANIKET BARAI<span className="accent-dot">.</span></span>
           <button ref={closeRef} className={`intro-card__close${closing ? ' intro-card__close--closing' : ''}`} type="button" onClick={dismiss} aria-label="Close introduction and view portfolio"><span>CLOSE</span></button>
         </header>
         <div className="intro-card__body">
-          <div className="intro-card__meta">
-            <p id="intro-timing" className="intro-card__eyebrow eyebrow"><span className="availability__dot" aria-hidden="true" /> {autoClosePaused ? 'AUTO-CLOSE PAUSED' : 'AUTO-CLOSES IN 15S'}</p>
-            <button className="intro-card__timer eyebrow" type="button" onClick={toggleAutoClose} aria-label={autoClosePaused ? 'Resume automatic close in 15 seconds' : 'Pause automatic close and keep this card open'}>{autoClosePaused ? 'RESUME TIMER' : 'KEEP OPEN'}</button>
-          </div>
+          <p id="intro-timing" className="intro-card__eyebrow eyebrow"><span className="availability__dot" aria-hidden="true" /> AUTO-CLOSES IN 5S</p>
           <h1 id="intro-title" className="intro-card__title font-display">Open to <em className="font-serif">internships</em><br />{' '}&amp; freelance projects<span className="accent-dot">.</span></h1>
           <p id="intro-copy" className="intro-card__copy">Thank you for visiting my portfolio. If you have an opportunity or a project in mind, I would be glad to connect.</p>
           <dl className="intro-card__details">

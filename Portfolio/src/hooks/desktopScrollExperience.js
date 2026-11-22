@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { sceneState, sceneStops } from '../sceneState';
+import { clearReveals, reveal, stageReveals } from './scrollReveals';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +12,7 @@ const clamp = gsap.utils.clamp;
 
 // Dynamically loaded only on capable, motion-enabled desktops. One cleanup
 // disposes every trigger, ticker listener and Lenis instance on resize/unmount.
-export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateHero }) {
+export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange }) {
   const lenis = new Lenis({ duration: 1.15, smoothWheel: true, wheelMultiplier: 0.9, autoRaf: false });
   lenisRef.current = lenis;
   const sync = () => ScrollTrigger.update();
@@ -73,16 +74,6 @@ export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateH
       });
     });
 
-    // Slow initial connections shouldn't hide the hero while a chunk loads.
-    if (animateHero) {
-      gsap.fromTo('.hero-line-inner',
-        { yPercent: 110 },
-        { yPercent: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', delay: 0.08 });
-      gsap.fromTo('.hero-reveal',
-        { y: 26, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.18 });
-    }
-
     gsap.utils.toArray('[data-reveal-lines]').forEach(group => {
       gsap.fromTo(group.querySelectorAll('.line-inner'), { yPercent: 110 }, {
         yPercent: 0, stagger: 0.11, duration: 0.95, ease: 'power3.out',
@@ -141,7 +132,29 @@ export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateH
         },
       });
       pinRef.current = { trigger: tween.scrollTrigger, distance: distance() };
-      return () => { pinRef.current = null; };
+
+      const cards = [...rail.querySelectorAll('.project-card')];
+      const pending = stageReveals(cards);
+      pending.forEach(card => {
+        const show = () => reveal(card);
+        if (cards.indexOf(card) < 2) {
+          // The first cards enter vertically, before the rail starts moving.
+          ScrollTrigger.create({ trigger: '.project-viewport', start: 'top 88%', onEnter: show, onEnterBack: show, once: true });
+        } else {
+          // Later cards deal in as the pinned rail carries them into view.
+          ScrollTrigger.create({ trigger: card, containerAnimation: tween, start: 'left 96%', end: 'right 0%', onEnter: show, onEnterBack: show, once: true });
+        }
+      });
+      return () => { clearReveals(pending); pinRef.current = null; };
+    });
+    mm.add('(max-width: 1023px)', () => {
+      // On medium screens the gallery is vertical, so use ordinary triggers.
+      const pending = stageReveals([...document.querySelectorAll('.project-card')]);
+      pending.forEach(card => {
+        const show = () => reveal(card);
+        ScrollTrigger.create({ trigger: card, start: 'top 90%', onEnter: show, onEnterBack: show, once: true });
+      });
+      return () => clearReveals(pending);
     });
 
     // A font swap can change headline and rail measurements.

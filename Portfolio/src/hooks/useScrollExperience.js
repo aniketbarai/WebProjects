@@ -1,10 +1,14 @@
 import { useCallback, useLayoutEffect, useRef } from 'react';
+import { mountNativeReveals } from './scrollReveals';
 
 const sectionIds = ['hero', 'projects', 'about', 'skills', 'experience', 'education', 'contact'];
 const clamp = (min, max, value) => Math.max(min, Math.min(max, value));
 
-function mountNativeSpy(onSectionChange) {
+function mountNativeSpy(onSectionChange, mobileMotion) {
   let frame = 0;
+  const cards = mobileMotion ? [...document.querySelectorAll('.project-card')] : [];
+  const work = mobileMotion ? document.querySelector('.work-section') : null;
+  if (mobileMotion) work?.classList.add('work-section--mobile-motion');
   const update = () => {
     const center = window.innerHeight * 0.48;
     const current = sectionIds.find(id => {
@@ -15,6 +19,18 @@ function mountNativeSpy(onSectionChange) {
     const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     const progress = document.querySelector('.nav-progress');
     if (progress) progress.style.transform = `scaleX(${window.scrollY / max})`;
+    const workRect = mobileMotion && work?.getBoundingClientRect();
+    if (workRect && workRect.bottom > 0 && workRect.top < window.innerHeight) {
+      const midpoint = window.innerHeight / 2;
+      // Batch reads before writes so the images glide without layout thrashing.
+      const visible = cards.map(card => ({ card, rect: card.getBoundingClientRect() }))
+        .filter(({ rect }) => rect.bottom > 0 && rect.top < window.innerHeight);
+      visible.forEach(({ card, rect }) => {
+        const distance = midpoint - (rect.top + rect.height / 2);
+        const amount = clamp(-1, 1, distance / (midpoint + rect.height / 2)) * 10;
+        card.style.setProperty('--mobile-parallax', `${amount.toFixed(2)}px`);
+      });
+    }
   };
   const schedule = () => {
     if (frame) return;
@@ -27,10 +43,18 @@ function mountNativeSpy(onSectionChange) {
     window.removeEventListener('scroll', schedule);
     window.removeEventListener('resize', schedule);
     cancelAnimationFrame(frame);
+    work?.classList.remove('work-section--mobile-motion');
+    cards.forEach(card => card.style.removeProperty('--mobile-parallax'));
   };
 }
 
-export function useScrollExperience({ reduced, compact, lowPower, onSectionChange }) {
+function mountNativeScroll({ onSectionChange, reduced, compact, lowPower }) {
+  const stopSpy = mountNativeSpy(onSectionChange, compact && !reduced && !lowPower);
+  const stopReveals = reduced || lowPower ? () => {} : mountNativeReveals();
+  return () => { stopReveals(); stopSpy(); };
+}
+
+export function useScrollExperience({ suspended, reduced, compact, lowPower, onSectionChange }) {
   const lenisRef = useRef(null);
   const pinRef = useRef(null);
 
@@ -67,26 +91,26 @@ export function useScrollExperience({ reduced, compact, lowPower, onSectionChang
   }, []);
 
   useLayoutEffect(() => {
+    // The hero can show beneath the intro without starting scroll or 3D work.
+    if (suspended) return undefined;
     // Mobile, reduced-motion, and low-power devices don't fetch GSAP or Lenis.
-    // Native scrolling keeps all sections readable and minimizes startup work.
-    if (compact || reduced || lowPower) return mountNativeSpy(onSectionChange);
+    // Native scrolling keeps all sections readable; motion-enabled mobile gets
+    // small IntersectionObserver reveals without the desktop animation bundle.
+    if (compact || reduced || lowPower) return mountNativeScroll({ onSectionChange, reduced, compact, lowPower });
 
     let active = true;
     let cleanup = () => {};
-    const start = performance.now();
     import('./desktopScrollExperience.js').then(({ mountDesktopScroll }) => {
       if (!active) return;
-      cleanup = mountDesktopScroll({
-        lenisRef, pinRef, onSectionChange,
-        animateHero: performance.now() - start < 700,
-      });
+      // The hero already appeared behind the intro; never hide and reanimate it.
+      cleanup = mountDesktopScroll({ lenisRef, pinRef, onSectionChange });
     }).catch(() => {
       // Progressive enhancement: site navigation still works without the
       // animation chunk (for example if a browser extension blocks it).
-      if (active) cleanup = mountNativeSpy(onSectionChange);
+      if (active) cleanup = mountNativeScroll({ onSectionChange, reduced, compact, lowPower });
     });
     return () => { active = false; cleanup(); };
-  }, [reduced, compact, lowPower, onSectionChange]);
+  }, [suspended, reduced, compact, lowPower, onSectionChange]);
 
   return { scrollTo, focusCard, dragTo, lenisRef };
 }
