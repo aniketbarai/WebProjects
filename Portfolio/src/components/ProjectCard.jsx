@@ -19,7 +19,10 @@ export default function ProjectCard({ project, index, onSelect, onFocus, interac
   }
 
   return (
-    <article className={`project-card${project.featured ? ' project-card--featured' : ''}`} data-project-index={index} onFocusCapture={() => onFocus(index)}>
+    <article className={`project-card${project.featured ? ' project-card--featured' : ''}`} data-project-index={index} onFocusCapture={event => {
+      event.currentTarget.classList.remove('scroll-pending');
+      onFocus(index);
+    }}>
       <div className="project-card__shell" onPointerMove={tilt} onPointerLeave={reset}>
         <div className="project-card__meta eyebrow"><span>0{index + 1} / 0{projects.length}</span><span>{project.category}</span></div>
         <button type="button" className="project-card__cover" onClick={event => onSelect(project, event.currentTarget)} aria-label={`${project.name} view project details`} data-cursor="VIEW">

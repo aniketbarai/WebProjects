@@ -9,10 +9,10 @@ class CanvasBoundary extends Component {
   render() { return this.state.failed ? null : this.props.children; }
 }
 
-export default function SceneLayer({ reduced, compact, lowPower, active, obscured }) {
+export default function SceneLayer({ reduced, compact, lowPower, active, obscured, defer = false }) {
   const [load, setLoad] = useState(false);
   const [ready, setReady] = useState(false);
-  const canRender = !reduced && !compact && !lowPower;
+  const canRender = !defer && !reduced && !compact && !lowPower;
   // Without animated 3D, avoid repeating one fixed shape over every paragraph.
   const staticClass = canRender || active === 'hero' ? '' : active === 'contact' ? ' scene-layer--contact' : ' scene-layer--quiet';
 
