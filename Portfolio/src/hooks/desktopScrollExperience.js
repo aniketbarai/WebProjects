@@ -22,15 +22,10 @@ export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateH
 
   let refreshStops;
   let refreshRaf;
-  let settleMarquee;
   let mm;
   let fontsCancelled = false;
   const context = gsap.context(() => {
     const progressLine = document.querySelector('.nav-progress');
-    const marqueeTrack = document.querySelector('.marquee-track');
-    const marquee = marqueeTrack
-      ? gsap.to(marqueeTrack, { xPercent: -50, duration: 28, ease: 'none', repeat: -1 })
-      : null;
     let stops = [];
 
     refreshStops = () => {
@@ -59,12 +54,6 @@ export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateH
       onUpdate(self) {
         updateScene(self.scroll());
         if (progressLine) progressLine.style.transform = `scaleX(${self.progress})`;
-        if (marquee) {
-          const speed = clamp(-3, 3, 1 + self.getVelocity() / 1100);
-          gsap.to(marquee, { timeScale: speed, duration: 0.25, overwrite: true });
-          clearTimeout(settleMarquee);
-          settleMarquee = setTimeout(() => gsap.to(marquee, { timeScale: 1, duration: 0.65 }), 180);
-        }
       },
       onRefresh(self) {
         refreshStops();
@@ -88,10 +77,10 @@ export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateH
     if (animateHero) {
       gsap.fromTo('.hero-line-inner',
         { yPercent: 110 },
-        { yPercent: 0, duration: 1.05, stagger: 0.12, ease: 'power3.out', delay: 0.92 });
+        { yPercent: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', delay: 0.08 });
       gsap.fromTo('.hero-reveal',
         { y: 26, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.85, stagger: 0.1, ease: 'power3.out', delay: 1.13 });
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.18 });
     }
 
     gsap.utils.toArray('[data-reveal-lines]').forEach(group => {
@@ -163,7 +152,6 @@ export function mountDesktopScroll({ lenisRef, pinRef, onSectionChange, animateH
   return () => {
     fontsCancelled = true;
     cancelAnimationFrame(refreshRaf);
-    clearTimeout(settleMarquee);
     ScrollTrigger.removeEventListener('refresh', refreshStops);
     mm?.revert();
     context.revert();
