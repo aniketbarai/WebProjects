@@ -4,7 +4,7 @@ import { useMediaFlags } from './hooks/useMediaFlags';
 import { useScrollExperience } from './hooks/useScrollExperience';
 import Navbar from './components/Navbar';
 import SceneLayer from './components/SceneLayer';
-import Preloader from './components/Preloader';
+import AvailabilityIntro from './components/AvailabilityIntro';
 import ProjectCard from './components/ProjectCard';
 import ProjectIndex from './components/ProjectIndex';
 
@@ -35,9 +35,9 @@ function SectionTop({ number, label, right }) {
   return <div className="section-top eyebrow" data-reveal><span>{number} / {label}</span><span>{right}</span></div>;
 }
 
-function Marquee({ staticMode }) {
+function Marquee() {
   return (
-    <div className={`skills-marquee${staticMode ? ' skills-marquee--static' : ''}`} aria-hidden="true">
+    <div className="skills-marquee" aria-hidden="true">
       <div className="marquee-track">
         {[0, 1].map(copy => (
           <div className="marquee-set" key={copy}>
@@ -50,6 +50,19 @@ function Marquee({ staticMode }) {
 }
 
 export default function App() {
+  const [introOpen, setIntroOpen] = useState(true);
+  const closeIntro = useCallback(() => setIntroOpen(false), []);
+
+  useEffect(() => {
+    if (introOpen) return undefined;
+    const frame = requestAnimationFrame(() => document.getElementById('hero-title')?.focus({ preventScroll: true }));
+    return () => cancelAnimationFrame(frame);
+  }, [introOpen]);
+
+  return introOpen ? <AvailabilityIntro onClose={closeIntro} /> : <PortfolioSite />;
+}
+
+function PortfolioSite() {
   const flags = useMediaFlags();
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light');
   const [active, setActive] = useState('hero');
@@ -130,19 +143,17 @@ export default function App() {
       {!flags.reduced && !flags.compact && !flags.lowPower && flags.finePointer && !menuOpen && !selectedProject && (
         <Suspense fallback={null}><CustomCursor enabled /></Suspense>
       )}
-      <Preloader reduced={flags.reduced || flags.compact || flags.lowPower} />
 
       <main id="site-main">
         {/* 00 / HERO */}
         <section id="hero" className="hero" aria-labelledby="hero-title">
           <div className="hero__top content-width hero-reveal eyebrow">
             <span>00 / AN INTRODUCTION</span>
-            <span className="availability"><span className="availability__dot" /> OPEN TO INTERNSHIPS &amp; FREELANCE</span>
           </div>
           <div className="hero__body content-width">
             <div className="hero__lead">
               <p className="hero__overline eyebrow hero-reveal">ANIKET BARAI <span aria-hidden="true">/</span> MUMBAI, INDIA</p>
-              <h1 id="hero-title" className="hero__title font-display">
+              <h1 id="hero-title" className="hero__title font-display" tabIndex={-1}>
                 <MaskLine hero>Full-stack</MaskLine>
                 <MaskLine hero>developer <em className="font-serif">&amp;</em></MaskLine>
                 <MaskLine hero>founder<span className="accent-dot">.</span></MaskLine>

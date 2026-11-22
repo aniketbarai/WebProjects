@@ -48,7 +48,7 @@ export default function ProjectDetail({ project, onClose, reduced }) {
       transition={reduced ? { duration: 0 } : { duration: 0.68, ease: [0.76, 0, 0.24, 1] }}>
       <div className="detail-view__top page-gutter">
         <span className="eyebrow">PROJECT / 0{projects.indexOf(project) + 1}</span>
-        <button ref={closeRef} type="button" onClick={requestClose} className="detail-view__close" aria-label={`Close ${project.name} details`}>CLOSE <span aria-hidden="true">×</span></button>
+        <button ref={closeRef} type="button" onClick={requestClose} className="detail-view__close" aria-label={`Close ${project.name} details`}>CLOSE</button>
       </div>
       <div className="detail-view__body content-width">
         <div className="detail-view__intro">
